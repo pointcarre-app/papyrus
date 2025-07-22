@@ -1,0 +1,69 @@
+[
+  {
+    "id": "header-section",
+    "html": "<table style='width: 100%; border-collapse: collapse; border: 0.5px solid #e0e0e0;'><tr><td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 50%;'>Name: _______________</td><td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 25%;'>Class: _______________</td><td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 25%;'>StatisticsPro</td></tr><tr><td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 50%;'>Date: _______________</td><td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 25%;'>Score: ___/100</td><td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 25%;'>Grade 10-12</td></tr></table>",
+    "classes": ["font-mono"],
+    "style": "",
+    "isPapyrusHeader": true
+  },
+  {
+    "id": "main-title",
+    "html": "<div>Statistics & Probability - Practice Set 6</div>",
+    "classes": [],
+    "style": "font-family: 'Spectral', serif; font-size: 24px; font-weight: bold; text-align: center; color: #2c3e50; margin-bottom: 5mm;"
+  },
+  {
+    "id": "subtitle",
+    "html": "<div>Data Analysis & Probability Distributions</div>",
+    "classes": [],
+    "style": "font-family: 'Spectral', serif; font-size: 18px; font-weight: 500; text-align: center; color: #5a6c7d; font-style: italic; margin-bottom: 8mm;"
+  },
+  {
+    "id": "question-1",
+    "html": "<div><strong>1)</strong> Find the mean of the data set: $\\{5, 8, 12, 15, 20\\}$</div>",
+    "classes": [],
+    "style": "margin-bottom: 8mm;"
+  },
+  {
+    "id": "question-2",
+    "html": "<div><strong>2)</strong> Calculate the standard deviation of the data: $\\{2, 4, 6, 8, 10\\}$<br/>Formula: $\\sigma = \\sqrt{\\frac{\\sum(x_i - \\mu)^2}{n}}$</div>",
+    "classes": [],
+    "style": "margin-bottom: 8mm;"
+  },
+  {
+    "id": "question-3",
+    "html": "<div><strong>3)</strong> A fair six-sided die is rolled. What is the probability of rolling a number greater than 4?</div>",
+    "classes": [],
+    "style": "margin-bottom: 8mm;"
+  },
+  {
+    "id": "question-4",
+    "html": "<div><strong>4)</strong> In a normal distribution with mean $\\mu = 50$ and standard deviation $\\sigma = 10$, what percentage of data falls within one standard deviation of the mean?</div>",
+    "classes": [],
+    "style": "margin-bottom: 8mm;"
+  },
+  {
+    "id": "question-5",
+    "html": "<div><strong>5)</strong> Two cards are drawn from a standard deck without replacement. What is the probability that both cards are hearts?</div>",
+    "classes": [],
+    "style": "margin-bottom: 8mm;"
+  },
+  {
+    "id": "question-6",
+    "html": "<div><strong>6)</strong> Find the median and mode of the data set: $\\{3, 7, 7, 9, 12, 15, 15, 15, 18\\}$</div>",
+    "classes": [],
+    "style": "margin-bottom: 8mm;"
+  },
+  {
+    "id": "question-7",
+    "html": "<div><strong>7)</strong> A binomial experiment has $n = 10$ trials and probability of success $p = 0.3$. Find $P(X = 2)$<br/>Formula: $P(X = k) = \\binom{n}{k} p^k (1-p)^{n-k}$</div>",
+    "classes": [],
+    "style": "margin-bottom: 8mm;"
+  },
+  {
+    "id": "question-8",
+    "html": "<div><strong>8)</strong> Given the correlation coefficient $r = 0.85$ between two variables, describe the strength and direction of the linear relationship.</div>",
+    "classes": [],
+    "style": "margin-bottom: 8mm;"
+  }
+] 

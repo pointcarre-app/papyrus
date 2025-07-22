@@ -1,0 +1,88 @@
+/**
+ * Base styles - Typography and basic layout
+ */
+
+/* Font family classes */
+.font-heading {
+    font-family: 'Spectral', serif;
+}
+
+.font-body {
+    font-family: 'Inter', sans-serif;
+}
+
+.font-mono {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    font-size: var(--font-size-body);
+    line-height: 1.6;
+}
+
+/* Typography with dynamic font sizes and Spectral for headings */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Spectral', serif;
+    margin-top: 0;
+}
+
+h1 {
+    font-size: var(--font-size-h1);
+    margin-bottom: 1rem;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: var(--font-size-h2);
+    margin-bottom: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+h3 {
+    font-size: var(--font-size-h3);
+    margin-bottom: 1rem;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+h4 {
+    font-size: var(--font-size-h4);
+    margin-bottom: 0.8rem;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+h5 {
+    font-size: var(--font-size-h5);
+    margin-bottom: 0.8rem;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+h6 {
+    font-size: var(--font-size-h6);
+    margin-bottom: 0.8rem;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+p {
+    margin-bottom: 0.75rem;
+    font-size: var(--font-size-body);
+    line-height: 1.6;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Basic layout utilities */
+.page-content {
+    height: 100%;
+    overflow: hidden;
+}
+
+.page-content > * {
+    margin: 0;
+    padding: 0;
+} 

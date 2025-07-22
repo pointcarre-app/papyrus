@@ -1,0 +1,69 @@
+[
+  {
+    "id": "header-section",
+    "html": "<table style='width: 100%; border-collapse: collapse; border: 0.5px solid #e0e0e0;'><tr><td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 50%;'>Name: _______________</td><td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 25%;'>Class: _______________</td><td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 25%;'>GeometryMaster</td></tr><tr><td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 50%;'>Date: _______________</td><td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 25%;'>Score: ___/100</td><td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 25%;'>Grade 9-12</td></tr></table>",
+    "classes": ["font-mono"],
+    "style": "",
+    "isPapyrusHeader": true
+  },
+  {
+    "id": "main-title",
+    "html": "<div>Geometry Essentials - Practice Set 2</div>",
+    "classes": [],
+    "style": "font-family: 'Spectral', serif; font-size: 24px; font-weight: bold; text-align: center; color: #2c3e50; margin-bottom: 5mm;"
+  },
+  {
+    "id": "subtitle",
+    "html": "<div>Areas, Volumes & Geometric Proofs</div>",
+    "classes": [],
+    "style": "font-family: 'Spectral', serif; font-size: 18px; font-weight: 500; text-align: center; color: #5a6c7d; font-style: italic; margin-bottom: 8mm;"
+  },
+  {
+    "id": "question-1",
+    "html": "<div><strong>1)</strong> Find the area of a circle with radius $r = 8$ cm. Use $\\pi \\approx 3.14$</div>",
+    "classes": [],
+    "style": "margin-bottom: 8mm;"
+  },
+  {
+    "id": "question-2",
+    "html": "<div><strong>2)</strong> A right triangle has legs of length 5 cm and 12 cm. Find the length of the hypotenuse using the Pythagorean theorem.</div>",
+    "classes": [],
+    "style": "margin-bottom: 8mm;"
+  },
+  {
+    "id": "question-3",
+    "html": "<div><strong>3)</strong> Calculate the volume of a rectangular prism with dimensions: length = 10 cm, width = 6 cm, height = 4 cm.</div>",
+    "classes": [],
+    "style": "margin-bottom: 8mm;"
+  },
+  {
+    "id": "question-4",
+    "html": "<div><strong>4)</strong> Find the area of a triangle with base $b = 15$ cm and height $h = 8$ cm.<br/>Formula: $A = \\frac{1}{2}bh$</div>",
+    "classes": [],
+    "style": "margin-bottom: 8mm;"
+  },
+  {
+    "id": "question-5",
+    "html": "<div><strong>5)</strong> A cylinder has radius $r = 4$ cm and height $h = 10$ cm. Find its volume.<br/>Formula: $V = \\pi r^2 h$</div>",
+    "classes": [],
+    "style": "margin-bottom: 8mm;"
+  },
+  {
+    "id": "question-6",
+    "html": "<div><strong>6)</strong> Two parallel lines are cut by a transversal. If one angle measures $75°$, what is the measure of its corresponding angle?</div>",
+    "classes": [],
+    "style": "margin-bottom: 8mm;"
+  },
+  {
+    "id": "question-7",
+    "html": "<div><strong>7)</strong> Find the circumference of a circle with diameter $d = 14$ cm.<br/>Formula: $C = \\pi d$</div>",
+    "classes": [],
+    "style": "margin-bottom: 8mm;"
+  },
+  {
+    "id": "question-8",
+    "html": "<div><strong>8)</strong> In triangle ABC, if $\\angle A = 60°$ and $\\angle B = 80°$, find $\\angle C$.</div>",
+    "classes": [],
+    "style": "margin-bottom: 8mm;"
+  }
+] 

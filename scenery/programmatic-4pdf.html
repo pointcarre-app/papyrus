@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="PCA Papyrus - Programmatic 4-PDF Generation Example" />
+    <title>PCA Papyrus - Programmatic 4-PDF Generator</title>
+    <link rel="stylesheet" href="../src/styles/index.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+          rel="stylesheet" />
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+    <style>
+        .font-heading {
+            font-family: 'Spectral', serif;
+        }
+
+        .font-body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .progress-container {
+            transition: all 0.3s ease;
+        }
+
+        .json-preview {
+            max-height: 150px;
+            overflow-y: auto;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: #495057;
+        }
+    </style>
+
+    <script>
+        window.process = {
+            env: {
+                NODE_ENV: 'development'
+            }
+        };
+    </script>
+  </head>
+
+  <body class="bg-gray-50 font-body">
+    <div class="min-h-screen">
+      <!-- Header -->
+      <header class="bg-white border-b border-gray-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+              <h1 class="font-heading font-semibold text-2xl text-gray-900">PCA Papyrus</h1>
+              <div class="text-sm text-gray-500">Programmatic 4-PDF Generator</div>
+            </div>
+            <div class="flex items-center gap-2">
+              <a href="./index.html" class="btn btn-sm btn-outline">Dual PDF Mode</a>
+              <a href="./multi-index.html" class="btn btn-sm btn-outline">Multi PDF Mode</a>
+              <div class="badge badge-accent badge-sm">Programmatic</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Introduction -->
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
+          <h2 class="font-heading font-semibold text-xl text-blue-900 mb-3">
+            🔧 Programmatic PDF Generation Example
+          </h2>
+          <p class="text-blue-800 mb-4">
+            This example demonstrates automated generation and printing of 4 different mathematical PDFs with a single button click.
+            Perfect for batch processing, automated workflows, or integration into educational platforms.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-blue-700">
+            <div>
+              <strong>✅ Pre-loaded JSON Sources:</strong>
+              <ul class="list-disc list-inside mt-1 space-y-1">
+                <li>Algebra Practice Set</li>
+                <li>Geometry Worksheets</li>
+                <li>Calculus Problems</li>
+                <li>Statistics Quiz</li>
+              </ul>
+            </div>
+            <div>
+              <strong>🚀 One-Click Features:</strong>
+              <ul class="list-disc list-inside mt-1 space-y-1">
+                <li>Generate all 4 PDFs automatically</li>
+                <li>Combined printing with page breaks</li>
+                <li>Progress tracking and status updates</li>
+                <li>Professional formatting maintained</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Control Panel -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="font-heading font-medium text-lg text-gray-900">Batch PDF Generation Control</h3>
+            <div class="flex items-center gap-3">
+              <div id="status-indicator" class="badge badge-neutral">Ready</div>
+              <button id="generate-all-btn" onclick="generateAndPrintAll()" class="btn btn-primary btn-lg">
+                <span class="loading loading-spinner loading-sm hidden" id="loading-spinner"></span>
+                📄 Generate & Print All 4 PDFs
+              </button>
+            </div>
+          </div>
+
+          <!-- Progress Bar -->
+          <div id="progress-container" class="progress-container mb-6 hidden">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-medium text-gray-700">Processing...</span>
+              <span id="progress-text" class="text-sm text-gray-500">0/4 PDFs</span>
+            </div>
+            <progress id="progress-bar" class="progress progress-primary w-full" value="0" max="100"></progress>
+          </div>
+
+          <!-- Configuration -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Margins -->
+            <div class="form-section bg-gray-50 rounded-lg p-4">
+              <h4 class="font-medium text-gray-800 mb-3">Page Margins (mm)</h4>
+              <div class="grid grid-cols-2 gap-2">
+                <div class="form-control">
+                  <label class="label py-1">
+                    <span class="label-text text-xs">Top</span>
+                  </label>
+                  <input class="input input-xs" type="number" id="margin-top" value="15" min="1" max="50" />
+                </div>
+                <div class="form-control">
+                  <label class="label py-1">
+                    <span class="label-text text-xs">Right</span>
+                  </label>
+                  <input class="input input-xs" type="number" id="margin-right" value="10" min="0" max="50" />
+                </div>
+                <div class="form-control">
+                  <label class="label py-1">
+                    <span class="label-text text-xs">Bottom</span>
+                  </label>
+                  <input class="input input-xs" type="number" id="margin-bottom" value="15" min="0" max="50" />
+                </div>
+                <div class="form-control">
+                  <label class="label py-1">
+                    <span class="label-text text-xs">Left</span>
+                  </label>
+                  <input class="input input-xs" type="number" id="margin-left" value="10" min="0" max="50" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Fonts -->
+            <div class="form-section bg-gray-50 rounded-lg p-4">
+              <h4 class="font-medium text-gray-800 mb-3">Font Sizes (px)</h4>
+              <div class="grid grid-cols-2 gap-2">
+                <div class="form-control">
+                  <label class="label py-1">
+                    <span class="label-text text-xs">H1</span>
+                  </label>
+                  <input class="input input-xs" type="number" id="font-h1" value="28" min="8" max="72" />
+                </div>
+                <div class="form-control">
+                  <label class="label py-1">
+                    <span class="label-text text-xs">H2</span>
+                  </label>
+                  <input class="input input-xs" type="number" id="font-h2" value="24" min="8" max="64" />
+                </div>
+                <div class="form-control">
+                  <label class="label py-1">
+                    <span class="label-text text-xs">Body</span>
+                  </label>
+                  <input class="input input-xs" type="number" id="font-body" value="12" min="8" max="24" />
+                </div>
+                <div class="form-control">
+                  <label class="label py-1">
+                    <span class="label-text text-xs">Space</span>
+                  </label>
+                  <input class="input input-xs" type="number" id="space-between-divs" value="3" min="0" max="20" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Options -->
+            <div class="form-section bg-gray-50 rounded-lg p-4">
+              <h4 class="font-medium text-gray-800 mb-3">Output Options</h4>
+              <div class="space-y-3">
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <input type="checkbox" id="show-page-numbers" class="checkbox checkbox-sm" checked />
+                  <span class="text-sm">Page numbers</span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <input type="checkbox" id="debug-mode" class="checkbox checkbox-sm" />
+                  <span class="text-sm">Debug borders</span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <input type="checkbox" id="auto-print" class="checkbox checkbox-sm" checked />
+                  <span class="text-sm">Auto-print after generation</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- JSON Sources Preview -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- PDF 1 -->
+          <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+            <div class="flex items-center justify-between mb-3">
+              <h4 class="font-medium text-gray-800">📊 PDF #1: Algebra Practice</h4>
+              <div class="badge badge-outline badge-sm">~3 pages</div>
+            </div>
+            <div id="json-preview-1" class="json-preview">Loading algebra content...</div>
+          </div>
+
+          <!-- PDF 2 -->
+          <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+            <div class="flex items-center justify-between mb-3">
+              <h4 class="font-medium text-gray-800">📐 PDF #2: Geometry Worksheets</h4>
+              <div class="badge badge-outline badge-sm">~2 pages</div>
+            </div>
+            <div id="json-preview-2" class="json-preview">Loading geometry content...</div>
+          </div>
+
+          <!-- PDF 3 -->
+          <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+            <div class="flex items-center justify-between mb-3">
+              <h4 class="font-medium text-gray-800">📈 PDF #3: Calculus Problems</h4>
+              <div class="badge badge-outline badge-sm">~4 pages</div>
+            </div>
+            <div id="json-preview-3" class="json-preview">Loading calculus content...</div>
+          </div>
+
+          <!-- PDF 4 -->
+          <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+            <div class="flex items-center justify-between mb-3">
+              <h4 class="font-medium text-gray-800">📉 PDF #4: Statistics Quiz</h4>
+              <div class="badge badge-outline badge-sm">~2 pages</div>
+            </div>
+            <div id="json-preview-4" class="json-preview">Loading statistics content...</div>
+          </div>
+        </div>
+
+        <!-- Hidden processing elements -->
+        <div id="processing-container"
+             style="position: absolute;
+                    top: -9999px;
+                    left: -9999px;
+                    visibility: hidden">
+          <textarea id="json-input"></textarea>
+          <div id="pages-container"></div>
+        </div>
+      </main>
+    </div>
+
+    <script type="module">
+        import {
+            initializeMargins,
+            setMargins,
+            getCurrentMargins
+        } from '../src/core/margin-config.js';
+        import {
+            initializeFontSizes,
+            setFontSizes,
+            getCurrentFontSizes
+        } from '../src/core/font-config.js';
+        import {
+            initializePageNumberConfig,
+            setShowPageNumbers,
+            getShowPageNumbers
+        } from '../src/core/page-number-config.js';
+        import {
+            setSpaceBetweenDivs
+        } from '../src/core/margin-config.js';
+        import {
+            generatePreviewFromJSON
+        } from '../src/core/preview-generator.js';
+
+        // Pre-defined JSON content for 4 different PDFs
+        const pdfSources = {
+            1: {
+                name: "Algebra Practice",
+                content: [{
+                    "id": "header-1",
+                    "html": "<table style='width: 100%; border-collapse: collapse; border: 1px solid #333;'><tr><td style='border: 1px solid #333; padding: 5px;'>Name: _______________</td><td style='border: 1px solid #333; padding: 5px;'>Class: _______________</td></tr></table>",
+                    "isPapyrusHeader": true
+                }, {
+                    "id": "title-1",
+                    "html": "<h1>Algebra Practice Set</h1>",
+                    "style": "text-align: center; color: #2c3e50;"
+                }, {
+                    "id": "q1-1",
+                    "html": "<div>1) Solve for $x$: $3x + 7 = 22$</div>"
+                }, {
+                    "id": "q2-1",
+                    "html": "<div>2) Simplify: $(2x + 3)(x - 1)$</div>"
+                }, {
+                    "id": "q3-1",
+                    "html": "<div>3) Factor: $x^2 - 5x + 6$</div>"
+                }, {
+                    "id": "q4-1",
+                    "html": "<div>4) Solve the system:<br />$$\\begin{cases} 2x + y = 7 \\\\ x - y = 2 \\end{cases}$$</div>"
+                }]
+            },
+            2: {
+                name: "Geometry Worksheets",
+                content: [{
+                    "id": "header-2",
+                    "html": "<table style='width: 100%; border-collapse: collapse; border: 1px solid #333;'><tr><td style='border: 1px solid #333; padding: 5px;'>Name: _______________</td><td style='border: 1px solid #333; padding: 5px;'>Date: _______________</td></tr></table>",
+                    "isPapyrusHeader": true
+                }, {
+                    "id": "title-2",
+                    "html": "<h1>Geometry Practice</h1>",
+                    "style": "text-align: center; color: #27ae60;"
+                }, {
+                    "id": "q1-2",
+                    "html": "<div>1) Find the area of a circle with radius $r = 5$ cm.<br />Formula: $A = \\pi r^2$</div>"
+                }, {
+                    "id": "q2-2",
+                    "html": "<div>2) In a right triangle, if $a = 3$ and $b = 4$, find $c$.<br />Use: $a^2 + b^2 = c^2$</div>"
+                }, {
+                    "id": "q3-2",
+                    "html": "<div>3) Calculate the volume of a sphere with radius $r = 6$ cm.<br />Formula: $V = \\frac{4}{3}\\pi r^3$</div>"
+                }]
+            },
+            3: {
+                name: "Calculus Problems",
+                content: [{
+                    "id": "header-3",
+                    "html": "<table style='width: 100%; border-collapse: collapse; border: 1px solid #333;'><tr><td style='border: 1px solid #333; padding: 5px;'>Student: _______________</td><td style='border: 1px solid #333; padding: 5px;'>Calculus Exam</td></tr></table>",
+                    "isPapyrusHeader": true
+                }, {
+                    "id": "title-3",
+                    "html": "<h1>Calculus Practice Problems</h1>",
+                    "style": "text-align: center; color: #8e44ad;"
+                }, {
+                    "id": "q1-3",
+                    "html": "<div>1) Find the derivative: $\\frac{d}{dx}[x^3 + 2x^2 - 5x + 1]$</div>"
+                }, {
+                    "id": "q2-3",
+                    "html": "<div>2) Evaluate: $\\int_0^2 (3x^2 + 4x) dx$</div>"
+                }, {
+                    "id": "q3-3",
+                    "html": "<div>3) Find the limit: $\\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2}$</div>"
+                }, {
+                    "id": "q4-3",
+                    "html": "<div>4) Chain rule: $\\frac{d}{dx}[\\sin(2x^2 + 1)]$</div>"
+                }, {
+                    "id": "q5-3",
+                    "html": "<div>5) Integration by parts: $\\int x e^x dx$</div>"
+                }]
+            },
+            4: {
+                name: "Statistics Quiz",
+                content: [{
+                    "id": "header-4",
+                    "html": "<table style='width: 100%; border-collapse: collapse; border: 1px solid #333;'><tr><td style='border: 1px solid #333; padding: 5px;'>Name: _______________</td><td style='border: 1px solid #333; padding: 5px;'>Statistics Quiz</td></tr></table>",
+                    "isPapyrusHeader": true
+                }, {
+                    "id": "title-4",
+                    "html": "<h1>Statistics & Probability</h1>",
+                    "style": "text-align: center; color: #e74c3c;"
+                }, {
+                    "id": "q1-4",
+                    "html": "<div>1) Calculate the mean of: 5, 8, 12, 15, 20</div>"
+                }, {
+                    "id": "q2-4",
+                    "html": "<div>2) Standard deviation formula: $\\sigma = \\sqrt{\\frac{\\sum(x_i - \\mu)^2}{N}}$<br />Explain each component.</div>"
+                }, {
+                    "id": "q3-4",
+                    "html": "<div>3) Probability of getting heads twice in 3 coin flips?</div>"
+                }, {
+                    "id": "q4-4",
+                    "html": "<div>4) Normal distribution: $f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}$<br />What do $\\mu$ and $\\sigma$ represent?</div>"
+                }]
+            }
+        };
+
+        // Global state
+        let generatedPDFs = {};
+        let isProcessing = false;
+
+        // Initialize PCA Papyrus
+        function initializePapyrus() {
+            initializeMargins();
+            initializeFontSizes();
+            initializePageNumberConfig();
+
+            // Set default configuration for batch processing
+            setMargins({
+                top: parseInt(document.getElementById('margin-top').value),
+                right: parseInt(document.getElementById('margin-right').value),
+                bottom: parseInt(document.getElementById('margin-bottom').value),
+                left: parseInt(document.getElementById('margin-left').value)
+            });
+
+            setFontSizes({
+                h1: parseInt(document.getElementById('font-h1').value),
+                h2: parseInt(document.getElementById('font-h2').value),
+                h3: 20,
+                h4: 18,
+                h5: 16,
+                h6: 14,
+                body: parseInt(document.getElementById('font-body').value)
+            });
+
+            setSpaceBetweenDivs(parseInt(document.getElementById('space-between-divs').value));
+            setShowPageNumbers(document.getElementById('show-page-numbers').checked);
+
+            console.log('✅ PCA Papyrus initialized for programmatic generation');
+        }
+
+        // Display JSON previews
+        function displayJSONPreviews() {
+            Object.keys(pdfSources).forEach(id => {
+                const preview = document.getElementById(`json-preview-${id}`);
+                const content = JSON.stringify(pdfSources[id].content, null, 2);
+                const truncated = content.length > 300 ? content.substring(0, 300) + '...\n}' : content;
+                preview.textContent = truncated;
+            });
+        }
+
+        // Generate single PDF
+        async function generateSinglePDF(pdfId) {
+            return new Promise((resolve) => {
+                const jsonInput = document.getElementById('json-input');
+                const container = document.getElementById('pages-container');
+
+                // Set JSON content
+                jsonInput.value = JSON.stringify(pdfSources[pdfId].content, null, 2);
+
+                // Generate preview
+                generatePreviewFromJSON();
+
+                // Wait for generation and math rendering
+                setTimeout(() => {
+                    const pages = container.innerHTML.trim();
+                    generatedPDFs[pdfId] = {
+                        name: pdfSources[pdfId].name,
+                        content: pages
+                    };
+
+                    console.log(`✅ Generated PDF ${pdfId}: ${pdfSources[pdfId].name}`);
+                    resolve(pages);
+                }, 800); // Allow time for KaTeX rendering
+            });
+        }
+
+        // Update progress display
+        function updateProgress(current, total, status) {
+            const progressContainer = document.getElementById('progress-container');
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            const statusIndicator = document.getElementById('status-indicator');
+
+            progressContainer.classList.remove('hidden');
+            progressBar.value = (current / total) * 100;
+            progressText.textContent = `${current}/${total} PDFs`;
+            statusIndicator.textContent = status;
+            statusIndicator.className = current === total ? 'badge badge-success' : 'badge badge-warning';
+        }
+
+        // Print all generated PDFs
+        function printAllPDFs() {
+            const validPDFs = Object.values(generatedPDFs).filter(pdf => pdf.content);
+
+            if (validPDFs.length === 0) {
+                alert('No PDFs generated to print!');
+                return;
+            }
+
+            // Combine all PDF content
+            let combinedContent = '';
+            validPDFs.forEach((pdf, index) => {
+                let content = pdf.content;
+
+                // Add page break before subsequent PDFs
+                if (index > 0) {
+                    content = content.replace(
+                        '<div class="page-preview"',
+                        '<div class="page-preview" style="page-break-before: always;"'
+                    );
+                }
+
+                combinedContent += content;
+            });
+
+            // Get current settings
+            const margins = getCurrentMargins();
+            const fontSizes = getCurrentFontSizes();
+            const showPageNumbers = getShowPageNumbers();
+
+            // Create hidden iframe for printing
+            const printFrame = document.createElement('iframe');
+            printFrame.style.position = 'absolute';
+            printFrame.style.top = '-9999px';
+            printFrame.style.left = '-9999px';
+            printFrame.style.width = '0px';
+            printFrame.style.height = '0px';
+            printFrame.style.border = 'none';
+
+            document.body.appendChild(printFrame);
+
+            const printDoc = printFrame.contentDocument;
+            printDoc.open();
+            printDoc.write(`
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <title>PCA Papyrus - Batch Generated PDFs</title>
+            <meta charset="UTF-8" />
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+            <style>
+                @page {
+                    size: A4;
+
+                    margin: $ {
+                        margins.top
+                    }
+
+                    mm $ {
+                        margins.right
+                    }
+
+                    mm $ {
+                        margins.bottom
+                    }
+
+                    mm $ {
+                        margins.left
+                    }
+
+                    mm;
+                }
+
+                :root {
+                    --font-h1: $ {
+                        fontSizes.h1
+                    }
+
+                    px;
+
+                    --font-h2: $ {
+                        fontSizes.h2
+                    }
+
+                    px;
+
+                    --font-h3: $ {
+                        fontSizes.h3
+                    }
+
+                    px;
+
+                    --font-h4: $ {
+                        fontSizes.h4
+                    }
+
+                    px;
+
+                    --font-h5: $ {
+                        fontSizes.h5
+                    }
+
+                    px;
+
+                    --font-h6: $ {
+                        fontSizes.h6
+                    }
+
+                    px;
+
+                    --font-body: $ {
+                        fontSizes.body
+                    }
+
+                    px;
+                }
+
+                * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                }
+
+                body {
+                    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+                    font-size: var(--font-body);
+                    line-height: 1.6;
+                    color: #000;
+                    background: white;
+                }
+
+                .page-preview {
+                    width: 210mm;
+                    min-height: 297mm;
+                    background: white;
+                    position: relative;
+                    page-break-after: always;
+                    page-break-inside: avoid;
+                }
+
+                .page-preview:last-child {
+                    page-break-after: avoid;
+                }
+
+                h1 {
+                    font-size: var(--font-h1);
+                    margin-bottom: 0.5em;
+                }
+
+                h2 {
+                    font-size: var(--font-h2);
+                    margin-bottom: 0.4em;
+                }
+
+                h3 {
+                    font-size: var(--font-h3);
+                    margin-bottom: 0.3em;
+                }
+
+                h4 {
+                    font-size: var(--font-h4);
+                    margin-bottom: 0.3em;
+                }
+
+                h5 {
+                    font-size: var(--font-h5);
+                    margin-bottom: 0.2em;
+                }
+
+                h6 {
+                    font-size: var(--font-h6);
+                    margin-bottom: 0.2em;
+                }
+
+                p {
+                    margin-bottom: 0.5em;
+                }
+
+                .katex-display {
+                    margin: 0.5em 0;
+                }
+
+                @media print {
+                    body {
+                        print-color-adjust: exact;
+                    }
+
+                    .page-preview {
+                        box-shadow: none;
+                        border: none;
+                        margin: 0;
+                        page-break-after: always;
+                    }
+
+                    .page-preview:last-child {
+                        page-break-after: avoid;
+                    }
+                }
+            </style>
+          </head>
+          <body>
+            ${combinedContent}
+          </body>
+          </html>
+        `);
+            printDoc.close();
+
+            // Trigger print dialog
+            setTimeout(() => {
+                printFrame.contentWindow.print();
+
+                // Clean up
+                setTimeout(() => {
+                    document.body.removeChild(printFrame);
+
+                    // Update status
+                    document.getElementById('status-indicator').textContent = 'Printed';
+                    document.getElementById('status-indicator').className = 'badge badge-success';
+                }, 1000);
+            }, 500);
+        }
+
+        // Main generation and printing function
+        window.generateAndPrintAll = async function() {
+            if (isProcessing) return;
+
+            isProcessing = true;
+            const btn = document.getElementById('generate-all-btn');
+            const spinner = document.getElementById('loading-spinner');
+
+            // Update UI
+            btn.disabled = true;
+            spinner.classList.remove('hidden');
+            updateProgress(0, 4, 'Starting...');
+
+            try {
+                // Update configuration
+                setMargins({
+                    top: parseInt(document.getElementById('margin-top').value),
+                    right: parseInt(document.getElementById('margin-right').value),
+                    bottom: parseInt(document.getElementById('margin-bottom').value),
+                    left: parseInt(document.getElementById('margin-left').value)
+                });
+
+                setFontSizes({
+                    h1: parseInt(document.getElementById('font-h1').value),
+                    h2: parseInt(document.getElementById('font-h2').value),
+                    h3: 20,
+                    h4: 18,
+                    h5: 16,
+                    h6: 14,
+                    body: parseInt(document.getElementById('font-body').value)
+                });
+
+                setSpaceBetweenDivs(parseInt(document.getElementById('space-between-divs').value));
+                setShowPageNumbers(document.getElementById('show-page-numbers').checked);
+
+                // Generate all PDFs
+                for (let i = 1; i <= 4; i++) {
+                    updateProgress(i - 1, 4, `Generating PDF ${i}...`);
+                    await generateSinglePDF(i);
+                    updateProgress(i, 4, i === 4 ? 'Generation Complete!' : `Generated PDF ${i}`);
+                }
+
+                // Auto-print if enabled
+                if (document.getElementById('auto-print').checked) {
+                    updateProgress(4, 4, 'Printing...');
+                    setTimeout(() => {
+                        printAllPDFs();
+                    }, 500);
+                } else {
+                    updateProgress(4, 4, 'Ready to Print');
+                }
+
+            } catch (error) {
+                console.error('Generation error:', error);
+                document.getElementById('status-indicator').textContent = 'Error';
+                document.getElementById('status-indicator').className = 'badge badge-error';
+            } finally {
+                isProcessing = false;
+                btn.disabled = false;
+                spinner.classList.add('hidden');
+            }
+        };
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initializePapyrus();
+            displayJSONPreviews();
+
+            console.log('🚀 Programmatic 4-PDF Generator Ready');
+        });
+    </script>
+  </body>
+</html>

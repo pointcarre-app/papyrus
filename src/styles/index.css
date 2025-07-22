@@ -1,0 +1,19 @@
+/**
+ * Main CSS entry point - imports all style modules
+ * PCA Papyrus Styles
+ */
+
+/* CSS Variables and design tokens */
+@import './variables.css';
+
+/* Base styles */
+@import './base.css';
+
+/* Component styles */
+@import './components.css';
+
+/* Page preview styles */
+@import './page-preview.css';
+
+/* Print styles */
+@import './print.css'; 

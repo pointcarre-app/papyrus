@@ -1,0 +1,69 @@
+[
+  {
+    "id": "header-section",
+    "html": "<table style='width: 100%; border-collapse: collapse; border: 0.5px solid #e0e0e0;'><tr><td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 50%;'>Name: _______________</td><td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 25%;'>Class: _______________</td><td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 25%;'>CalculusDerivatives</td></tr><tr><td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 50%;'>Date: _______________</td><td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 25%;'>Score: ___/100</td><td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 25%;'>Grade 11-12</td></tr></table>",
+    "classes": ["font-mono"],
+    "style": "",
+    "isPapyrusHeader": true
+  },
+  {
+    "id": "main-title",
+    "html": "<div>Calculus: Derivatives - Practice Set 4</div>",
+    "classes": [],
+    "style": "font-family: 'Spectral', serif; font-size: 24px; font-weight: bold; text-align: center; color: #2c3e50; margin-bottom: 5mm;"
+  },
+  {
+    "id": "subtitle",
+    "html": "<div>Differentiation Rules & Applications</div>",
+    "classes": [],
+    "style": "font-family: 'Spectral', serif; font-size: 18px; font-weight: 500; text-align: center; color: #5a6c7d; font-style: italic; margin-bottom: 8mm;"
+  },
+  {
+    "id": "question-1",
+    "html": "<div><strong>1)</strong> Find $\\frac{d}{dx}[x^3 + 2x^2 - 5x + 7]$</div>",
+    "classes": [],
+    "style": "margin-bottom: 8mm;"
+  },
+  {
+    "id": "question-2",
+    "html": "<div><strong>2)</strong> Use the product rule to find $\\frac{d}{dx}[x^2 \\sin(x)]$</div>",
+    "classes": [],
+    "style": "margin-bottom: 8mm;"
+  },
+  {
+    "id": "question-3",
+    "html": "<div><strong>3)</strong> Find the derivative of $f(x) = \\frac{3x + 1}{x^2 - 4}$ using the quotient rule.</div>",
+    "classes": [],
+    "style": "margin-bottom: 8mm;"
+  },
+  {
+    "id": "question-4",
+    "html": "<div><strong>4)</strong> Use the chain rule to find $\\frac{d}{dx}[(2x + 3)^5]$</div>",
+    "classes": [],
+    "style": "margin-bottom: 8mm;"
+  },
+  {
+    "id": "question-5",
+    "html": "<div><strong>5)</strong> Find the equation of the tangent line to $y = x^2 - 4x + 1$ at the point where $x = 2$</div>",
+    "classes": [],
+    "style": "margin-bottom: 8mm;"
+  },
+  {
+    "id": "question-6",
+    "html": "<div><strong>6)</strong> Find all critical points of $f(x) = x^3 - 6x^2 + 9x + 2$</div>",
+    "classes": [],
+    "style": "margin-bottom: 8mm;"
+  },
+  {
+    "id": "question-7",
+    "html": "<div><strong>7)</strong> Find $\\frac{d}{dx}[e^{2x}]$ and $\\frac{d}{dx}[\\ln(3x)]$</div>",
+    "classes": [],
+    "style": "margin-bottom: 8mm;"
+  },
+  {
+    "id": "question-8",
+    "html": "<div><strong>8)</strong> Use implicit differentiation to find $\\frac{dy}{dx}$ if $x^2 + y^2 = 25$</div>",
+    "classes": [],
+    "style": "margin-bottom: 8mm;"
+  }
+] 

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="PCA Papyrus - Geometry Worksheet Example" />
+    <meta name="keywords" content="geometry, mathematics, PCA Papyrus, worksheet, triangles, circles" />
+    <title>PCA Papyrus - Geometry Worksheet</title>
+    <link rel="stylesheet" href="../src/styles/index.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+          rel="stylesheet" />
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+    <style>
+        .font-heading {
+            font-family: 'Spectral', serif;
+        }
+
+        .font-body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .form-section {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .example-badge {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+    </style>
+
+    <script>
+        window.process = {
+            env: {
+                NODE_ENV: 'development'
+            }
+        };
+    </script>
+  </head>
+
+  <body class="bg-gray-50 font-body">
+    <div class="min-h-screen">
+      <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex justify-between items-center py-4">
+            <div class="flex items-center">
+              <h1 class="font-heading font-bold text-xl text-gray-900">PCA Papyrus</h1>
+              <span class="ml-3 text-sm text-gray-500">Geometry Worksheet Example</span>
+            </div>
+            <nav class="flex space-x-4">
+              <a href="index.html" class="text-gray-600 hover:text-gray-900 transition-colors">Main Demo</a>
+              <a href="advanced-calculus.html" class="text-gray-600 hover:text-gray-900 transition-colors">Calculus</a>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      <main class="max-w-full mx-auto px-4 sm:px-6 lg:px-4 py-6">
+        <div class="example-badge">📐 Geometry Worksheet - Triangles, Circles & Proofs</div>
+
+        <h1 class="font-heading font-semibold text-gray-900 border-b border-gray-200 mb-8">
+          Geometry Worksheet - 10th Grade
+        </h1>
+
+        <div class="grid grid-cols-1 xl:grid-cols-[30%_70%] gap-8">
+          <!-- Left Side: JSON + Controls -->
+          <div class="space-y-6">
+            <!-- JSON Input -->
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <h2 class="text-lg font-heading font-medium text-gray-900">JSON Content</h2>
+                <div class="flex gap-2">
+                  <button onclick="loadGeometryExample()" class="btn btn-xs btn-primary">Load Geometry</button>
+                  <button onclick="clearJSON()" class="btn btn-xs btn-outline">Clear</button>
+                </div>
+              </div>
+              <textarea id="json-input"
+                        placeholder="Geometry worksheet content will be loaded here..."
+                        class="w-full h-80 font-mono text-sm p-3 border border-gray-300 rounded-md resize-vertical focus:ring-2 focus:ring-blue-500 focus:border-transparent"></textarea>
+            </div>
+
+            <!-- Controls -->
+            <div>
+              <h2 class="text-lg font-heading font-medium text-gray-900 mb-6">Settings</h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Page Layout -->
+                <div class="form-section">
+                  <h3 class="font-heading font-medium text-gray-800 mb-3">Page Layout (mm)</h3>
+                  <form id="margin-form" class="grid grid-cols-3 gap-3">
+                    <div class="form-control">
+                      <label class="label py-1">
+                        <span class="label-text text-xs text-gray-600">Top</span>
+                      </label>
+                      <input class="input input-xs border-gray-300"
+                             type="number"
+                             id="margin-top"
+                             name="margin-top"
+                             min="1"
+                             max="50"
+                             step="1"
+                             value="5" />
+                    </div>
+                    <div class="form-control">
+                      <label class="label py-1">
+                        <span class="label-text text-xs text-gray-600">Right</span>
+                      </label>
+                      <input class="input input-xs border-gray-300"
+                             type="number"
+                             id="margin-right"
+                             name="margin-right"
+                             min="0"
+                             max="50"
+                             step="1"
+                             value="5" />
+                    </div>
+                    <div class="form-control">
+                      <label class="label py-1">
+                        <span class="label-text text-xs text-gray-600">Bottom</span>
+                      </label>
+                      <input class="input input-xs border-gray-300"
+                             type="number"
+                             id="margin-bottom"
+                             name="margin-bottom"
+                             min="0"
+                             max="50"
+                             step="1"
+                             value="5" />
+                    </div>
+                    <div class="form-control">
+                      <label class="label py-1">
+                        <span class="label-text text-xs text-gray-600">Left</span>
+                      </label>
+                      <input class="input input-xs border-gray-300"
+                             type="number"
+                             id="margin-left"
+                             name="margin-left"
+                             min="0"
+                             max="50"
+                             step="1"
+                             value="5" />
+                    </div>
+                    <div class="form-control">
+                      <label class="label py-1">
+                        <span class="label-text text-xs text-gray-600">Space</span>
+                      </label>
+                      <input class="input input-xs border-gray-300"
+                             type="number"
+                             id="space-between-divs"
+                             name="space-between-divs"
+                             min="0"
+                             max="20"
+                             step="1"
+                             value="3" />
+                    </div>
+                  </form>
+                </div>
+
+                <!-- Font Sizes -->
+                <div class="form-section">
+                  <h3 class="font-heading font-medium text-gray-800 mb-3">Font Sizes (px)</h3>
+                  <form id="font-form" class="grid grid-cols-4 gap-2">
+                    <div class="form-control">
+                      <label class="label py-1">
+                        <span class="label-text text-xs text-gray-600">H1</span>
+                      </label>
+                      <input class="input input-xs border-gray-300"
+                             type="number"
+                             id="font-h1"
+                             name="font-h1"
+                             min="8"
+                             max="72"
+                             step="1"
+                             value="32" />
+                    </div>
+                    <div class="form-control">
+                      <label class="label py-1">
+                        <span class="label-text text-xs text-gray-600">H2</span>
+                      </label>
+                      <input class="input input-xs border-gray-300"
+                             type="number"
+                             id="font-h2"
+                             name="font-h2"
+                             min="8"
+                             max="64"
+                             step="1"
+                             value="28" />
+                    </div>
+                    <div class="form-control">
+                      <label class="label py-1">
+                        <span class="label-text text-xs text-gray-600">H3</span>
+                      </label>
+                      <input class="input input-xs border-gray-300"
+                             type="number"
+                             id="font-h3"
+                             name="font-h3"
+                             min="8"
+                             max="56"
+                             step="1"
+                             value="24" />
+                    </div>
+                    <div class="form-control">
+                      <label class="label py-1">
+                        <span class="label-text text-xs text-gray-600">Body</span>
+                      </label>
+                      <input class="input input-xs border-gray-300"
+                             type="number"
+                             id="font-body"
+                             name="font-body"
+                             min="8"
+                             max="24"
+                             step="1"
+                             value="14" />
+                    </div>
+                  </form>
+                </div>
+
+                <!-- Display Options -->
+                <div class="form-section">
+                  <h3 class="font-heading font-medium text-gray-800 mb-3">Display Options</h3>
+                  <div class="space-y-2">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" id="debug-mode" class="checkbox checkbox-sm" />
+                      <span class="text-sm text-gray-700">Show element borders & dimensions</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" id="show-page-numbers" class="checkbox checkbox-sm" />
+                      <span class="text-sm text-gray-700">Show page numbers at top</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Statistics -->
+                <div class="form-section md:col-span-2">
+                  <h3 class="font-heading font-medium text-gray-800 mb-3">Content Statistics</h3>
+                  <div id="statistics-container" class="text-sm text-gray-600">
+                    <!-- Statistics will be dynamically inserted here -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Side: Preview -->
+          <div>
+            <div class="mx-auto px-4 sm:px-6 lg:px-8">
+              <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                  <button onclick="generatePages()" class="btn btn-sm btn-primary">Generate</button>
+                  <button onclick="printPage()" class="btn btn-sm btn-outline">Print</button>
+                </div>
+              </div>
+            </div>
+            <h2 class="text-lg font-heading font-medium text-gray-900 mb-4">
+              A4 Preview <span class="text-sm font-normal text-gray-500">(Geometry Worksheet)</span>
+            </h2>
+            <div id="pages-container"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script type="module" src="../src/core/app-init.js"></script>
+    <script>
+        // Geometry Worksheet Example Content
+        function loadGeometryExample() {
+            const geometryContent = [{
+                "id": "worksheet-header",
+                "html": "<table style='width: 100%; border-collapse: collapse; border: 1px solid #333;'><tr><td style='border: 1px solid #333; padding: 8px; width: 30%;'><strong>Name:</strong><br />_____________________</td><td style='border: 1px solid #333; padding: 8px; width: 30%;'><strong>Class:</strong><br />Geometry Period ___</td><td style='border: 1px solid #333; padding: 8px; width: 40%;'><strong>Date:</strong> ___________<br /><strong>Score:</strong> ___/50</td></tr></table>",
+                "isPapyrusHeader": true,
+                "style": "margin-bottom: 15mm;"
+            }, {
+                "id": "title",
+                "html": "<h1 style='text-align: center; color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px;'>Geometry Worksheet #12</h1><h2 style='text-align: center; color: #34495e; margin-top: 10px;'>Triangles, Circles, and Angle Relationships</h2>",
+                "style": "margin-bottom: 20px;"
+            }, {
+                "id": "instructions",
+                "html": "<div style='background: #e8f5e8; padding: 12px; border-radius: 5px; border-left: 4px solid #4caf50;'><strong>Instructions:</strong> Show all work. Use proper geometric notation. Diagrams are not to scale.</div>",
+                "style": "margin-bottom: 20px;"
+            }, {
+                "id": "section-1",
+                "html": "<h3 style='background: #f39c12; color: white; padding: 8px; border-radius: 5px; margin-bottom: 15px;'>Section 1: Triangle Properties (20 points)</h3>"
+            }, {
+                "id": "problem-1",
+                "html": "<div style='border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 5px;'><strong>1. (5 points)</strong> In triangle $ABC$, $\\angle A = 65°$ and $\\angle B = 48°$. Find $\\angle C$.<br /><br /><strong>Work:</strong><br /><br /><div style='height: 40px; border-bottom: 1px dashed #ccc;'></div><br /><strong>Answer:</strong> $\\angle C = $ ________</div>"
+            }, {
+                "id": "problem-2",
+                "html": "<div style='border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 5px;'><strong>2. (8 points)</strong> A triangle has sides of length 5 cm, 12 cm, and 13 cm.<br /><br />(a) Is this a right triangle? Justify your answer using the Pythagorean theorem.<br /><br /><div style='height: 60px; border: 1px dashed #ccc; margin: 10px 0;'></div><br />(b) Find the area of the triangle.<br /><br /><div style='height: 40px; border: 1px dashed #ccc; margin: 10px 0;'></div><br /><strong>Answer:</strong> Area = ________ cm²</div>"
+            }, {
+                "id": "problem-3",
+                "html": "<div style='border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 5px;'><strong>3. (7 points)</strong> In triangle $DEF$, $DE = 8$, $EF = 6$, and $DF = 10$. Find $\\cos(\\angle E)$ using the Law of Cosines.<br /><br /><strong>Law of Cosines:</strong> $c^2 = a^2 + b^2 - 2ab\\cos(C)$<br /><br /><div style='height: 80px; border: 1px dashed #ccc; margin: 10px 0;'></div><br /><strong>Answer:</strong> $\\cos(\\angle E) = $ ________</div>"
+            }, {
+                "id": "section-2",
+                "html": "<h3 style='background: #e74c3c; color: white; padding: 8px; border-radius: 5px; margin: 25px 0 15px 0;'>Section 2: Circle Geometry (15 points)</h3>"
+            }, {
+                "id": "problem-4",
+                "html": "<div style='border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 5px;'><strong>4. (6 points)</strong> A circle has radius $r = 8$ cm. Find:<br /><br />(a) The circumference: $C = 2\\pi r$<br /><br /><div style='height: 30px; border-bottom: 1px dashed #ccc;'></div><br />(b) The area: $A = \\pi r^2$<br /><br /><div style='height: 30px; border-bottom: 1px dashed #ccc;'></div><br /><strong>Answers:</strong> $C = $ ________ cm, $A = $ ________ cm²</div>"
+            }, {
+                "id": "problem-5",
+                "html": "<div style='border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 5px;'><strong>5. (9 points)</strong> In the circle below, chord $AB$ has length 12 cm and is 5 cm from the center.<br /><br /><div style='text-align: center; margin: 15px 0; padding: 20px; background: #f9f9f9; border: 1px dashed #999;'>[Circle diagram would go here]<br /><em>Circle with center O, chord AB, and perpendicular distance from O to AB = 5 cm</em></div><br />Find the radius of the circle.<br /><br /><strong>Hint:</strong> Use the relationship $r^2 = d^2 + (\\frac{c}{2})^2$ where $d$ is the distance from center to chord and $c$ is the chord length.<br /><br /><div style='height: 80px; border: 1px dashed #ccc; margin: 10px 0;'></div><br /><strong>Answer:</strong> $r = $ ________ cm</div>"
+            }, {
+                "id": "section-3",
+                "html": "<h3 style='background: #9b59b6; color: white; padding: 8px; border-radius: 5px; margin: 25px 0 15px 0;'>Section 3: Angle Relationships (15 points)</h3>"
+            }, {
+                "id": "problem-6",
+                "html": "<div style='border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 5px;'><strong>6. (5 points)</strong> Two parallel lines are cut by a transversal. If one angle measures 72°, find the measures of:<br /><br />(a) Its corresponding angle: ________<br />(b) Its alternate interior angle: ________<br />(c) Its supplementary angle: ________</div>"
+            }, {
+                "id": "problem-7",
+                "html": "<div style='border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 5px;'><strong>7. (10 points)</strong> In the diagram below, $\\overline{AB} \\parallel \\overline{CD}$ and $\\angle BAE = 115°$.<br /><br /><div style='text-align: center; margin: 15px 0; padding: 20px; background: #f9f9f9; border: 1px dashed #999;'>[Parallel lines diagram]<br /><em>Two parallel lines AB and CD with transversal AE, angle BAE = 115°</em></div><br />Find:<br />(a) $\\angle AED$ (alternate interior angles)<br />(b) $\\angle CED$ (supplementary angles)<br /><br /><div style='height: 60px; border: 1px dashed #ccc; margin: 10px 0;'></div><br /><strong>Answers:</strong> $\\angle AED = $ ________, $\\angle CED = $ ________</div>"
+            }, {
+                "id": "bonus",
+                "html": "<div style='border: 2px solid #f39c12; padding: 15px; margin: 20px 0; border-radius: 8px; background: #fef9e7;'><strong>⭐ Bonus Problem (5 points):</strong><br /><br />Prove that the sum of angles in any triangle is 180°.<br /><br /><strong>Given:</strong> Triangle $ABC$<br /><strong>Prove:</strong> $\\angle A + \\angle B + \\angle C = 180°$<br /><br /><div style='height: 100px; border: 1px dashed #f39c12; margin: 10px 0; background: white;'></div></div>"
+            }, {
+                "id": "reference-sheet",
+                "html": "<div style='border: 2px solid #34495e; padding: 15px; margin-top: 20px; background: #ecf0f1;'><h4 style='text-align: center; margin-bottom: 10px;'><strong>Reference Formulas</strong></h4><div style='display: grid; grid-template-columns: 1fr 1fr; gap: 15px; font-size: 11px;'><div><strong>Triangle Area:</strong><br />$A = \\frac{1}{2}bh$ or $A = \\frac{1}{2}ab\\sin(C)$<br /><br /><strong>Pythagorean Theorem:</strong><br />$a^2 + b^2 = c^2$<br /><br /><strong>Law of Cosines:</strong><br />$c^2 = a^2 + b^2 - 2ab\\cos(C)$</div><div><strong>Circle Formulas:</strong><br />Circumference: $C = 2\\pi r$<br />Area: $A = \\pi r^2$<br /><br /><strong>Angle Relationships:</strong><br />Vertical angles are equal<br />Corresponding angles are equal<br />Alternate interior angles are equal</div></div></div>"
+            }];
+
+            document.getElementById('json-input').value = JSON.stringify(geometryContent, null, 2);
+            generatePages();
+        }
+
+        // Auto-load example on page load
+        window.addEventListener('load', () => {
+            setTimeout(loadGeometryExample, 100);
+        });
+    </script>
+  </body>
+</html>

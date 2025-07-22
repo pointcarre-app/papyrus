@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PDF Printer with A4 Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Dancing+Script:wght@400..700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+          rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+          rel="stylesheet" />
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/@tailwindcss/typography@0.4.1/dist/typography.min.css"
+          rel="stylesheet"
+          type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script>
+        // Suppress Tailwind production warning for development
+        window.process = {
+            env: {
+                NODE_ENV: 'development'
+            }
+        };
+    </script>
+    <link rel="stylesheet" href="../src/styles/index.css" />
+  </head>
+
+
+  <body class="bg-base-100">
+
+    <div class="my-4 sm:my-18 max-w-4xl mx-auto">
+      <div class="flex flex-col gap-4 mx-auto">
+        <div class="editor-area">
+          <h2>JSON Content</h2>
+          <textarea id="json-input" style="width: 100%; height: 300px; font-family: monospace; padding: 15px; border: 1px solid #e0e0e0; border-radius: 4px; resize: vertical;">[
+  {
+    "id": "div1",
+    "html": "<h3>Mathematics Example</h3><p>The quadratic formula is: $$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$</p><p>This is a fundamental equation in algebra.</p>",
+    "classes": ["content-div"],
+    "style": ""
+  },
+  {
+    "id": "div2", 
+    "html": "<h3>Physics Content</h3><p>Einstein's mass-energy equivalence: $E = mc^2$</p><p>This equation shows the relationship between mass and energy.</p>",
+    "classes": ["content-div"],
+    "style": ""
+  },
+  {
+    "id": "div3",
+    "html": "<h3>More Math</h3><p>Integral example: $$\\int_{0}^{\\infty} e^{-x^2} dx = \\frac{\\sqrt{\\pi}}{2}$$</p><p>This is the Gaussian integral.</p>",
+    "classes": ["content-div"], 
+    "style": ""
+  },
+  {
+    "id": "div4",
+    "html": "<h3>Long Content</h3><p>This is a longer piece of content that might need to be split across pages.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><p>Matrix multiplication: $$\\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix} \\begin{pmatrix} e & f \\\\ g & h \\end{pmatrix} = \\begin{pmatrix} ae+bg & af+bh \\\\ ce+dg & cf+dh \\end{pmatrix}$$</p>",
+    "classes": ["content-div"],
+    "style": ""
+  }
+]</textarea>
+
+          <h3>Page Margins (mm)</h3>
+          <form id="margin-form" class="margin-form">
+            <div class="margin-grid">
+              <div class="margin-input-group">
+                <label for="margin-top">Top</label>
+                <input type="number" id="margin-top" name="margin-top" min="0" max="50" step="1" value="20" />
+              </div>
+              <div class="margin-input-group">
+                <label for="margin-right">Right</label>
+                <input type="number" id="margin-right" name="margin-right" min="0" max="50" step="1" value="20" />
+              </div>
+              <div class="margin-input-group">
+                <label for="margin-bottom">Bottom</label>
+                <input type="number" id="margin-bottom" name="margin-bottom" min="0" max="50" step="1" value="20" />
+              </div>
+              <div class="margin-input-group">
+                <label for="margin-left">Left</label>
+                <input type="number" id="margin-left" name="margin-left" min="0" max="50" step="1" value="20" />
+              </div>
+            </div>
+          </form>
+
+          <h3>Font Sizes (px)</h3>
+          <form id="font-form" class="font-form">
+            <div class="font-grid">
+              <div class="font-input-group">
+                <label for="font-h1">H1</label>
+                <input type="number" id="font-h1" name="font-h1" min="8" max="72" step="1" value="32" />
+              </div>
+              <div class="font-input-group">
+                <label for="font-h2">H2</label>
+                <input type="number" id="font-h2" name="font-h2" min="8" max="64" step="1" value="28" />
+              </div>
+              <div class="font-input-group">
+                <label for="font-h3">H3</label>
+                <input type="number" id="font-h3" name="font-h3" min="8" max="56" step="1" value="24" />
+              </div>
+              <div class="font-input-group">
+                <label for="font-h4">H4</label>
+                <input type="number" id="font-h4" name="font-h4" min="8" max="48" step="1" value="20" />
+              </div>
+              <div class="font-input-group">
+                <label for="font-h5">H5</label>
+                <input type="number" id="font-h5" name="font-h5" min="8" max="40" step="1" value="18" />
+              </div>
+              <div class="font-input-group">
+                <label for="font-h6">H6</label>
+                <input type="number" id="font-h6" name="font-h6" min="8" max="32" step="1" value="16" />
+              </div>
+              <div class="font-input-group">
+                <label for="font-body">Body</label>
+                <input type="number" id="font-body" name="font-body" min="8" max="24" step="1" value="14" />
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="controls">
+          <button onclick="generatePages()">Generate Pages</button>
+          <button onclick="printPage()">Print</button>
+        </div>
+        <div class="preview-container">
+          <h3>A4 Page Preview</h3>
+          <div id="pages-container"></div>
+        </div>
+        <script type="module" src="../src/core/app-init.js"></script>
+      </div>
+    </div>
+  </body>
+</html>

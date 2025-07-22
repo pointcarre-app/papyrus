@@ -1,0 +1,55 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+*.env
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE and Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs and databases
+*.log
+*.sqlite
+*.db
+
+# Build outputs
+dist/
+build/
+*.min.js
+*.map
+
+# Testing
+coverage/
+.nyc_output/
+.cache/
+
+# Temporary files
+*.tmp
+*.temp
+
+# PDF outputs (generated files)
+*.pdf
+
+# Jupyter Notebook
+.ipynb_checkpoints 

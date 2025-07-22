@@ -1,0 +1,60 @@
+/**
+ * Print styles - Clean PDF output
+ */
+
+@media print {
+    /* Hide UI elements when printing */
+    .editor-area,
+    .controls,
+    .preview-container > h3 {
+        display: none;
+    }
+
+    /* Page formatting for print */
+    .page-preview {
+        width: var(--page-width);
+        height: var(--page-height);
+        margin: 0;
+        padding: var(--page-margin-top) var(--page-margin-right) var(--page-margin-bottom) var(--page-margin-left);
+        border: none;
+        box-sizing: border-box;
+        page-break-after: always;
+        page-break-inside: avoid;
+        transform: none;
+        background: white;
+        position: relative;
+        box-shadow: none;
+    }
+
+    /* Hide debug page numbers in print */
+    .page-number {
+        display: none;
+    }
+
+    /* Page number at top for print */
+    .page-number-top {
+        text-align: right !important;
+        font-size: 9pt !important;
+        color: #666 !important;
+        font-weight: normal !important;
+        background: transparent !important;
+        padding: 0 0 6pt 0 !important;
+        margin: 0 0 8pt 0 !important;
+        font-family: 'Inter', sans-serif !important;
+        border-bottom: 0.5pt solid #ccc !important;
+        display: block !important;
+    }
+
+    /* Ensure content doesn't overflow */
+    .page-content {
+        height: 100%;
+        overflow: hidden;
+    }
+
+    /* Print-specific typography */
+    body {
+        margin: 0;
+        padding: 0;
+        background: white;
+    }
+} 

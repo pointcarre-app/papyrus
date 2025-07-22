@@ -1,0 +1,69 @@
+[
+  {
+    "id": "header-section",
+    "html": "<table style='width: 100%; border-collapse: collapse; border: 0.5px solid #e0e0e0;'><tr><td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 50%;'>Name: _______________</td><td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 25%;'>Class: _______________</td><td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 25%;'>TrigonoPro</td></tr><tr><td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 50%;'>Date: _______________</td><td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 25%;'>Score: ___/100</td><td style='border: 0.5px solid #e0e0e0; padding: 2mm; vertical-align: middle; width: 25%;'>Grade 10-12</td></tr></table>",
+    "classes": ["font-mono"],
+    "style": "",
+    "isPapyrusHeader": true
+  },
+  {
+    "id": "main-title",
+    "html": "<div>Trigonometry Fundamentals - Practice Set 3</div>",
+    "classes": [],
+    "style": "font-family: 'Spectral', serif; font-size: 24px; font-weight: bold; text-align: center; color: #2c3e50; margin-bottom: 5mm;"
+  },
+  {
+    "id": "subtitle",
+    "html": "<div>Sine, Cosine, Tangent & Triangle Solutions</div>",
+    "classes": [],
+    "style": "font-family: 'Spectral', serif; font-size: 18px; font-weight: 500; text-align: center; color: #5a6c7d; font-style: italic; margin-bottom: 8mm;"
+  },
+  {
+    "id": "question-1",
+    "html": "<div><strong>1)</strong> Find the exact value of $\\sin(30°)$</div>",
+    "classes": [],
+    "style": "margin-bottom: 8mm;"
+  },
+  {
+    "id": "question-2",
+    "html": "<div><strong>2)</strong> If $\\cos(\\theta) = \\frac{3}{5}$ and $\\theta$ is in the first quadrant, find $\\sin(\\theta)$</div>",
+    "classes": [],
+    "style": "margin-bottom: 8mm;"
+  },
+  {
+    "id": "question-3",
+    "html": "<div><strong>3)</strong> Convert $\\frac{2\\pi}{3}$ radians to degrees.</div>",
+    "classes": [],
+    "style": "margin-bottom: 8mm;"
+  },
+  {
+    "id": "question-4",
+    "html": "<div><strong>4)</strong> In a right triangle, if the opposite side is 7 cm and the hypotenuse is 25 cm, find $\\sin(\\theta)$</div>",
+    "classes": [],
+    "style": "margin-bottom: 8mm;"
+  },
+  {
+    "id": "question-5",
+    "html": "<div><strong>5)</strong> Solve for $x$: $\\tan(x) = 1$ where $0° \\leq x \\leq 90°$</div>",
+    "classes": [],
+    "style": "margin-bottom: 8mm;"
+  },
+  {
+    "id": "question-6",
+    "html": "<div><strong>6)</strong> Use the Law of Cosines to find side $c$ in triangle ABC where $a = 8$, $b = 6$, and $\\angle C = 60°$<br/>Formula: $c^2 = a^2 + b^2 - 2ab\\cos(C)$</div>",
+    "classes": [],
+    "style": "margin-bottom: 8mm;"
+  },
+  {
+    "id": "question-7",
+    "html": "<div><strong>7)</strong> Find the period of the function $f(x) = 3\\sin(2x + \\pi)$</div>",
+    "classes": [],
+    "style": "margin-bottom: 8mm;"
+  },
+  {
+    "id": "question-8",
+    "html": "<div><strong>8)</strong> Verify the identity: $\\sin^2(x) + \\cos^2(x) = 1$</div>",
+    "classes": [],
+    "style": "margin-bottom: 8mm;"
+  }
+] 
