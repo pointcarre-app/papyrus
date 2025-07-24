@@ -1,75 +1,22 @@
-# v0.1.0 - Dual JSON PDF Generation
+# Changelog
 
-## 🚀 New Features
+All notable changes to this project will be documented in this file.
 
-### Dual JSON PDF System
-- **Independent PDF Generation**: Two separate JSON inputs create independent PDFs
-- **Unified Print Output**: Combined printing with proper page breaks between PDFs
-- **Smart Tab Switching**: Seamless switching between JSON #1 and JSON #2
-- **Independent Processing**: Each PDF maintains its own headers, page splitting, and content flow
+## [0.0.1] - 2025-07-24
 
-### Enhanced User Interface
-- **JSON Source Tabs**: Visual tabs for switching between PDF #1 and PDF #2
-- **Active Indicator**: Clear indication of which JSON is currently being edited
-- **Combined Print Button**: Single button to print both PDFs together
-- **Preserved Controls**: All existing margin, font, and layout controls work for both PDFs
+### Added
+- **Multi-Document Management**: The application now supports managing, previewing, and printing multiple documents within a single session.
+- **Dynamic UI**: The user interface has been overhauled to support a dynamic number of document tabs, with buttons to add and remove documents on the fly.
+- **"Print All" and "Print Active"**: New printing options allow users to either print all documents in a single batch job or print only the currently selected document.
+- **Technical Documentation**: Added `docs/technical-summary.md` with a detailed explanation of the new architecture and a Mermaid diagram of the workflow.
 
-### Programmatic 4-PDF Generation System ⭐ **NEW**
-- **Enterprise Automation**: Complete batch generation of 4 mathematical PDF topics
-- **Single-Button Operation**: Generate and print all 4 PDFs with one click
-- **Pre-loaded Content**: Algebra, Geometry, Calculus, and Statistics problem sets
-- **Progress Tracking**: Real-time status updates and professional UI
-- **Educational Focus**: Perfect for institutions and content management platforms
+### Changed
+- **Core Architecture Refactor**: Replaced the static `DualJSONManager` with a flexible `DocumentManager` to handle an arbitrary number of documents.
+- **Improved Printing UX**: The printing process now uses a hidden `<iframe>`, which avoids opening a disruptive `about:blank` window and provides a smoother user experience.
+- **Simplified UI**: Removed the redundant "Generate" button, as previews now update automatically and reliably upon any change to the JSON content or settings.
 
-### Technical Improvements
-- **New Core Module**: `src/core/dual-app-init.js` for dual JSON management
-- **Updated Index**: `src/index.js` exports dual JSON functionality
-- **Enhanced HTML**: `scenery/index.html` updated with dual JSON interface
-- **Programmatic Example**: `scenery/programmatic-4pdf.html` for automated workflows
-- **Backward Compatibility**: All existing single JSON features preserved
-
-## 🔧 Architecture
-
-### File Structure Updates
-```
-src/core/
-├── dual-app-init.js     # NEW: Dual JSON management system
-├── app-init.js          # Existing: Single JSON (unchanged)
-└── multi-app-init.js    # Existing: Multi JSON (unchanged)
-```
-
-### API Extensions
-- `initializeDualApp()` - Initialize dual JSON mode
-- `switchToJSON(id)` - Switch between JSON inputs
-- `printBothPDFs()` - Combined PDF printing
-
-## 🎯 Use Cases
-
-### Educational Applications
-- **Exam Creation**: Generate two different exam versions simultaneously
-- **Worksheet Variants**: Create multiple versions with different problems
-- **Answer Keys**: Generate problem sets with corresponding solution sheets
-
-### Assessment Platforms
-- **A/B Testing**: Compare different question formats side-by-side
-- **Language Variants**: Create content in multiple languages
-- **Difficulty Levels**: Generate easy and advanced versions of the same topic
-
-### Content Management
-- **Template Comparison**: Compare different layout approaches
-- **Version Control**: Work on multiple document versions
-- **Batch Processing**: Prepare multiple related documents together
-
-### Programmatic Workflow Applications
-- **Educational Institutions**: Automated semester material generation across all math domains
-- **Content Platforms**: API integration for large-scale PDF generation workflows
-- **Enterprise Systems**: High-performance batch processing with progress monitoring
-- **Quality Assurance**: Standardized test material generation with consistent formatting
-
-# v0.0.1
-
-- Initial release
-- Project structure setup
-- License and documentation framework
-- Development server configuration
-- Core architecture planning 
+### Removed
+- **Legacy Documentation**: Removed all outdated and irrelevant documentation files from the `/docs` directory.
+- **Unused Scenery Files**: Deleted numerous unused HTML and JSON files from the `/scenery` directory to minimize the project and focus on the core `main.html` entrypoint.
+- **Placeholder Test Suite**: Removed the `/tests` directory, which contained only placeholder files for a future test suite.
+- **Non-essential Folders**: Deleted the `/experiments` and `/hooks` directories to further streamline the repository. 

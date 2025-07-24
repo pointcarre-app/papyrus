@@ -6,15 +6,26 @@ import { getCurrentMargins } from './margin-config.js';
 import { getCurrentFontSizes } from './font-config.js';
 import { getShowPageNumbers } from './page-number-config.js';
 
-// Enhanced print function with better page styling
-export function printPage() {
-    const printContent = document.getElementById('pages-container').innerHTML;
+// Print function that uses a hidden iframe to avoid a popup window
+export function printPage(contentToPrint) {
+    const printContent = contentToPrint || document.getElementById('pages-container').innerHTML;
     const margins = getCurrentMargins();
     const fontSizes = getCurrentFontSizes();
     const showPageNumbers = getShowPageNumbers();
-    
-    const printWindow = window.open('', '', 'width=900,height=700');
-    printWindow.document.write(`
+
+    // Create a hidden iframe
+    const printFrame = document.createElement('iframe');
+    printFrame.style.position = 'absolute';
+    printFrame.style.top = '-9999px';
+    printFrame.style.left = '-9999px';
+    printFrame.style.width = '0';
+    printFrame.style.height = '0';
+    printFrame.style.border = 'none';
+    document.body.appendChild(printFrame);
+
+    const printDoc = printFrame.contentWindow.document;
+    printDoc.open();
+    printDoc.write(`
         <!DOCTYPE html>
         <html>
             <head>
@@ -47,142 +58,40 @@ export function printPage() {
                         font-size: ${fontSizes.body}px;
                         line-height: 1.6;
                         color: #1a1a1a;
-                        background: #f5f5f5;
-                        margin: 0;
-                        padding: 20px;
+                        background: white; /* Print background should be white */
                     }
 
-                    /* Typography - enhanced for readability */
-                    h1 { 
-                        font-family: 'Spectral', serif;
-                        font-size: ${fontSizes.h1}px; 
-                        font-weight: 700; 
-                        line-height: 1.2; 
-                        margin: 0 0 1.2em 0;
-                        color: #111;
-                    }
-                    h2 { 
-                        font-family: 'Spectral', serif;
-                        font-size: ${fontSizes.h2}px; 
-                        font-weight: 600; 
-                        line-height: 1.3; 
-                        margin: 0 0 1em 0;
-                        color: #111;
-                    }
-                    h3 { 
-                        font-family: 'Spectral', serif;
-                        font-size: ${fontSizes.h3}px; 
-                        font-weight: 600; 
-                        line-height: 1.3; 
-                        margin: 0 0 0.9em 0;
-                        color: #222;
-                    }
-                    h4 { 
-                        font-family: 'Spectral', serif;
-                        font-size: ${fontSizes.h4}px; 
-                        font-weight: 600; 
-                        line-height: 1.4; 
-                        margin: 0 0 0.8em 0;
-                        color: #333;
-                    }
-                    h5 { 
-                        font-family: 'Spectral', serif;
-                        font-size: ${fontSizes.h5}px; 
-                        font-weight: 600; 
-                        line-height: 1.4; 
-                        margin: 0 0 0.7em 0;
-                        color: #333;
-                    }
-                    h6 { 
-                        font-family: 'Spectral', serif;
-                        font-size: ${fontSizes.h6}px; 
-                        font-weight: 600; 
-                        line-height: 1.4; 
-                        margin: 0 0 0.6em 0;
-                        color: #333;
-                    }
-                    
-                    p { 
-                        font-size: ${fontSizes.body}px; 
-                        line-height: 1.6; 
-                        margin: 0 0 0.75em 0;
-                        color: #2a2a2a;
+                    /* Typography */
+                    h1 { font-size: ${fontSizes.h1}px; font-weight: 700; margin-bottom: 1.2em; }
+                    h2 { font-size: ${fontSizes.h2}px; font-weight: 600; margin-bottom: 1em; }
+                    h3 { font-size: ${fontSizes.h3}px; font-weight: 600; margin-bottom: 0.9em; }
+                    h4 { font-size: ${fontSizes.h4}px; font-weight: 600; margin-bottom: 0.8em; }
+                    h5 { font-size: ${fontSizes.h5}px; font-weight: 600; margin-bottom: 0.7em; }
+                    h6 { font-size: ${fontSizes.h6}px; font-weight: 600; margin-bottom: 0.6em; }
+                    p { font-size: ${fontSizes.body}px; margin-bottom: 0.75em; }
+
+                    /* Page setup for printing */
+                    @page {
+                        size: A4;
+                        margin: ${margins.top}mm ${margins.right}mm ${margins.bottom}mm ${margins.left}mm;
                     }
 
-                    /* Enhanced page styling */
                     .page-preview {
                         width: 210mm;
-                        height: 297mm;
-                        margin: 0 auto 30px auto;
-                        padding: ${margins.top}mm ${margins.right}mm ${margins.bottom}mm ${margins.left}mm;
+                        min-height: 297mm; /* Use min-height to allow content to grow */
                         background: white;
-                        border: 2px solid #ddd;
-                        border-radius: 4px;
-                        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                        position: relative;
                         page-break-after: always;
                         page-break-inside: avoid;
-                        position: relative;
-                        overflow: hidden;
+                    }
+                    
+                    .page-preview:last-child {
+                        page-break-after: avoid;
                     }
 
-                    /* Page numbers - show if enabled */
-                    .page-number-top {
-                        ${showPageNumbers ? `
-                            display: block !important;
-                            text-align: right;
-                            font-size: 10px;
-                            color: #666;
-                            font-weight: 400;
-                            font-family: 'Inter', sans-serif;
-                            padding: 0 0 8px 0;
-                            margin: 0 0 12px 0;
-                            border-bottom: 1px solid #e0e0e0;
-                        ` : 'display: none;'}
-                    }
-
-                    /* Debug/preview page numbers - hide in print */
-                    .page-number {
-                        display: none;
-                    }
-
-                    /* Page content container */
-                    .page-content {
-                        height: calc(100% - ${showPageNumbers ? '25px' : '0px'});
-                        overflow: hidden;
-                        position: relative;
-                    }
-
-                    /* Math content styling */
-                    .katex {
-                        font-size: 1em;
-                    }
-
-                    /* Lists and spacing */
-                    ul, ol {
-                        margin: 0 0 0.75em 1.5em;
-                        padding: 0;
-                    }
-
-                    li {
-                        margin: 0 0 0.25em 0;
-                    }
-
-                    /* Tables */
-                    table {
-                        width: 100%;
-                        border-collapse: collapse;
-                        margin: 0 0 1em 0;
-                    }
-
-                    th, td {
-                        padding: 8px 12px;
-                        text-align: left;
-                        border: 1px solid #ddd;
-                    }
-
-                    th {
-                        background: #f8f9fa;
-                        font-weight: 600;
+                    /* Hide elements not meant for print */
+                    .page-number, .space-between-div {
+                        /* These are for screen preview only */
                     }
 
                     /* Print-specific media query */
@@ -194,76 +103,46 @@ export function printPage() {
                         }
 
                         .page-preview {
-                            width: 210mm;
-                            height: 297mm;
-                            margin: 0;
-                            padding: ${margins.top}mm ${margins.right}mm ${margins.bottom}mm ${margins.left}mm;
                             border: none;
-                            border-radius: 0;
                             box-shadow: none;
-                            page-break-after: always;
-                            page-break-inside: avoid;
-                            background: white;
+                            margin: 0;
                         }
 
-                        .page-number-top {
-                            ${showPageNumbers ? `
-                                display: block !important;
-                                text-align: right;
-                                font-size: 9pt;
-                                color: #666;
-                                font-weight: normal;
-                                font-family: 'Inter', sans-serif;
-                                padding: 0 0 6pt 0;
-                                margin: 0 0 8pt 0;
-                                border-bottom: 0.5pt solid #ccc;
-                            ` : 'display: none;'}
-                        }
-
-                        .page-content {
-                            height: 100%;
-                            overflow: hidden;
-                        }
-
-                        /* Last page shouldn't force a page break */
-                        .page-preview:last-child {
-                            page-break-after: auto;
-                        }
-                    }
-
-                    /* Print preview enhancements */
-                    @media screen {
-                        /* Add page labels for screen preview */
-                        .page-preview::before {
-                            content: "Page " counter(page-counter);
-                            counter-increment: page-counter;
-                            position: absolute;
-                            top: -25px;
-                            left: 0;
-                            font-size: 12px;
-                            color: #666;
-                            font-weight: 500;
-                            font-family: 'Inter', sans-serif;
-                        }
-
-                        body {
-                            counter-reset: page-counter;
+                        /* Ensure fonts are printed correctly */
+                        h1, h2, h3, h4, h5, h6, p {
+                            color: #000 !important;
                         }
                     }
                 </style>
             </head>
             <body>
                 ${printContent}
-                
-                <script>
-                    // Auto-print after a short delay to ensure fonts load
-                    setTimeout(() => {
-                        window.print();
-                    }, 500);
-                </script>
             </body>
         </html>
     `);
-    
-    printWindow.document.close();
+    printDoc.close();
+
+    // Wait for the iframe to load, then print and remove it
+    printFrame.onload = function() {
+        // Render KaTeX in the iframe
+        if (printFrame.contentWindow.renderMathInElement) {
+            printFrame.contentWindow.renderMathInElement(printDoc.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ]
+            });
+        }
+
+        // A short timeout can help ensure everything is rendered
+        setTimeout(() => {
+            printFrame.contentWindow.focus(); // Focus is needed for some browsers
+            printFrame.contentWindow.print();
+            
+            // Clean up the iframe after printing
+            setTimeout(() => {
+                document.body.removeChild(printFrame);
+            }, 500);
+        }, 250);
+    };
 } 
