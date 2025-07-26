@@ -18,6 +18,12 @@ export const PAGE_NUMBER_TOP = {
     heightMm: 25 / 3.78 // Convert to mm
 };
 
+// Page number bottom dimensions (NEW)
+export const PAGE_NUMBER_BOTTOM = {
+    heightPx: 25,
+    heightMm: 25 / 3.78
+};
+
 // Enhanced content item with computed properties
 class ContentItem {
     constructor(jsonData, index) {
@@ -47,8 +53,8 @@ class ContentItem {
     // Calculate page position based on content before this item
     calculatePagePosition(previousItems, margins, repeatingHeaderHeightPx = 0) {
         const baseContentHeightPx = PAGE_DIMENSIONS.heightPx - (margins.top + margins.bottom) * 3.78;
-        const pageNumberTopHeightPx = (typeof getShowPageNumbers === 'function' && getShowPageNumbers()) ? PAGE_NUMBER_TOP.heightPx : 0;
-        const availableContentHeightPx = baseContentHeightPx - repeatingHeaderHeightPx - pageNumberTopHeightPx; 
+        const pageNumberHeightPx = (typeof getShowPageNumbers === 'function' && getShowPageNumbers()) ? PAGE_NUMBER_BOTTOM.heightPx : 0;
+        const availableContentHeightPx = baseContentHeightPx - repeatingHeaderHeightPx - pageNumberHeightPx;
         const spaceBetweenDivs = window.getCurrentSpaceBetweenDivs ? window.getCurrentSpaceBetweenDivs() : 0;
         const spaceBetweenDivsPx = spaceBetweenDivs * 3.78;
         
@@ -165,8 +171,8 @@ export class ContentModel {
     
     // Calculate page content area
     calculatePageDimensions() {
-        const pageNumberTopHeightPx = (typeof getShowPageNumbers === 'function' && getShowPageNumbers()) ? PAGE_NUMBER_TOP.heightPx : 0;
-        this.pageContentHeightPx = PAGE_DIMENSIONS.heightPx - (this.margins.top + this.margins.bottom) * 3.78 - pageNumberTopHeightPx;
+        const pageNumberHeightPx = (typeof getShowPageNumbers === 'function' && getShowPageNumbers()) ? PAGE_NUMBER_BOTTOM.heightPx : 0;
+        this.pageContentHeightPx = PAGE_DIMENSIONS.heightPx - (this.margins.top + this.margins.bottom) * 3.78 - pageNumberHeightPx;
         this.pageContentHeightMm = parseFloat((this.pageContentHeightPx / 3.78).toFixed(1));
         
         // Log warnings if page space is very limited

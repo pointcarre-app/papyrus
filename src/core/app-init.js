@@ -2,17 +2,32 @@
  * Application initialization and event handling
  */
 
-import { generatePages } from './preview-generator.js';
+import { generatePages } from './preview/index.js';
 import { printPage } from './print-manager.js';
 import { initializeMargins, setMargins, getCurrentMargins, initializeSpaceBetweenDivs, setSpaceBetweenDivs, getCurrentSpaceBetweenDivs } from './margin-config.js';
 import { initializeFontSizes, setFontSizes, getCurrentFontSizes } from './font-config.js';
 import { initializePageNumberConfig, setShowPageNumbers, getShowPageNumbers } from './page-number-config.js';
 import { updateDebugHeightIndicators } from '../utils/json-handler.js';
+import { DocumentManager } from './document-manager.js';
+
+let documentManager;
+
+/**
+ * Prints the content of the currently active document.
+ */
+function printActiveDocument() {
+    const activeDoc = documentManager.getActiveDocument();
+    if (activeDoc) {
+        const contentToPrint = document.getElementById('pages-container').innerHTML;
+        printPage(contentToPrint);
+    }
+}
 
 // Auto-update when textarea changes
 function setupAutoUpdate() {
     const textarea = document.getElementById('json-input');
     textarea.addEventListener('input', function() {
+        documentManager.updateActiveDocumentContent(textarea.value);
         clearTimeout(window.updateTimeout);
         window.updateTimeout = setTimeout(generatePages, 300);
     });
@@ -181,7 +196,9 @@ async function loadExampleJSON() {
         
         const jsonData = await response.json();
         const textarea = document.getElementById('json-input');
-        textarea.value = JSON.stringify(jsonData, null, 2);
+        const jsonString = JSON.stringify(jsonData, null, 2);
+        textarea.value = jsonString;
+        documentManager.updateActiveDocumentContent(jsonString);
         generatePages(); // Regenerate preview with loaded content
     } catch (error) {
         console.error('Error loading JSON file:', error);
@@ -204,9 +221,9 @@ async function loadExampleJSON() {
 // Clear JSON textarea
 function clearJSON() {
     const textarea = document.getElementById('json-input');
-    textarea.value = '';
-    const container = document.getElementById('pages-container');
-    container.innerHTML = '';
+    textarea.value = '[]';
+    documentManager.updateActiveDocumentContent('[]');
+    generatePages();
 }
 
 // Initialize the application
@@ -217,12 +234,16 @@ export function initializeApp(debugMode = false, debugMargin = 0) {
     
     // Make functions globally available for button onclick handlers
     window.generatePages = generatePages;
-    window.printPage = printPage;
+    window.printPage = printPage; // "Print All" is now handled by the main print function
+    window.printActiveDocument = printActiveDocument;
     window.updateMarginsFromForm = updateMarginsFromForm;
     window.updateFontSizesFromForm = updateFontSizesFromForm;
     window.loadExampleJSON = loadExampleJSON;
     window.clearJSON = clearJSON;
     window.getCurrentSpaceBetweenDivs = getCurrentSpaceBetweenDivs;
+
+    // Initialize the document manager
+    documentManager = new DocumentManager('document-tabs', 'json-input');
     
     // Initialize margins, fonts, spacing, and page numbers
     initializeMargins();

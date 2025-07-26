@@ -72,32 +72,27 @@
     </script>
   </head>
 
-  <body class="bg-gray-50 font-body">
+  <body class="font-body">
     <div class="min-h-screen">
       <!-- Header -->
       <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-12 py-3">
           <div class="flex items-center justify-between">
-            <div class="flex items-center gap-4">
-              <h1 class="font-heading font-semibold text-xl text-gray-900">PCA Papyrus</h1>
-              <div class="text-sm text-gray-500">Dual PDF Generator</div>
-            </div>
-            <div class="flex items-center gap-2">
-              <a href="./multi-index.html" class="btn btn-sm btn-outline">Multi PDF Mode</a>
-              <div class="badge badge-primary badge-sm">Dual</div>
+            <div class="flex items-center">
+              <h1 class="font-heading text-xl text-gray-900 ">PCA Papyrus</h1>
             </div>
           </div>
         </div>
       </header>
 
-      <main class="max-w-full mx-auto px-4 sm:px-6 lg:px-12 py-6">
-        <div class="grid grid-cols-1 xl:grid-cols-[40%_60%] gap-8">
+      <main class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-12 py-6">
+        <div class="grid grid-cols-1 gap-8">
 
           <!-- Left Side: JSON + Controls -->
-          <div class="space-y-6">
+          <div class="space-y-12">
             <!-- Document Tabs -->
-            <div class="mb-6">
-              <div class="flex items-center justify-between mb-4">
+            <div class="">
+              <div class="flex items-center justify-between">
                 <h2 class="text-lg font-heading font-medium text-gray-900">Documents</h2>
               </div>
               <div id="document-tabs" class="flex items-center gap-2 flex-wrap">
@@ -107,7 +102,7 @@
 
             <!-- JSON Input -->
             <div>
-              <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center justify-between">
                 <h2 class="text-lg font-heading font-medium text-gray-900">JSON Source</h2>
                 <div class="flex gap-2">
                   <button onclick="loadExampleJSON()" class="btn btn-xs btn-primary">Load Example</button>
@@ -122,7 +117,7 @@
 
             <!-- Controls -->
             <div>
-              <h2 class="text-lg font-heading font-medium text-gray-900 mb-6">Settings</h2>
+              <h2 class="text-lg font-heading font-medium text-gray-900">Settings</h2>
 
               <div class="grid grid-cols-1 gap-6">
                 <!-- Page Layout -->
@@ -305,7 +300,7 @@
                     </label>
                     <label class="flex items-center gap-2 cursor-pointer">
                       <input type="checkbox" id="show-page-numbers" class="checkbox checkbox-sm" />
-                      <span class="text-sm text-gray-700">Show page numbers at top</span>
+                      <span class="text-sm text-gray-700">Show page numbers at bottom</span>
                     </label>
                   </div>
                 </div>
@@ -338,15 +333,6 @@
         </div>
       </div>
     </main>
-    <script type="module">
-        import {
-            initializeMultiApp
-        } from '../src/core/multi-app-init.js';
-
-        // Initialize the multi-JSON application
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeMultiApp();
-        });
-    </script>
+    <script type="module" src="../src/index.js"></script>
   </body>
 </html>

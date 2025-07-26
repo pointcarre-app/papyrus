@@ -15,18 +15,28 @@ export function getJSONFromTextarea() {
 
 // Create HTML element from JSON data
 export function createElementFromJSON(jsonData, debugMode = false) {
+    // Ensure that only the "html" field is required.
+    // Provide sensible defaults for all other fields.
+    const id = jsonData.id || `papyrus-element-${Math.random().toString(36).substr(2, 9)}`;
+    const classes = jsonData.classes || [];
+    const style = jsonData.style || '';
+
     const element = document.createElement('div');
-    element.innerHTML = jsonData.html;
-    element.className = jsonData.classes.join(' ');
-    if (jsonData.style) {
-        element.setAttribute('style', jsonData.style);
+    element.id = id;
+    element.innerHTML = jsonData.html || ''; // Use empty string if html is missing
+    
+    if (classes.length > 0) {
+        element.className = classes.join(' ');
+    }
+    
+    if (style) {
+        element.setAttribute('style', style);
     }
     
     // Apply debug styling if debug mode is enabled
     if (debugMode) {
         applyDebugStyling(element);
     } else {
-        // Ensure no debug artifacts remain
         removeDebugStyling(element);
     }
     

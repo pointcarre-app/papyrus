@@ -1,5 +1,19 @@
 
 
+
+# Fixes
+
+
+- [ ] "Show page numbers at bottom" may need a less stupid approach
+
+
+# Features
+
+- [ ] Add JSON <---> Form synchronization to enable editing of the JSON from the form and vice versa (must also update preview)
+
+
+# Testing
+
 - [ ] Test on windows edge
 
 - [ ] Test on macos safari

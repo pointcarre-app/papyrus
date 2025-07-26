@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import socketserver
+import sys
 from http.server import SimpleHTTPRequestHandler
 
 
@@ -24,9 +25,15 @@ class ReusableTCPServer(socketserver.TCPServer):
     allow_reuse_address = True
 
 
-PORT = 8004
+PORT = 8009
 
 if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        try:
+            PORT = int(sys.argv[1])
+        except ValueError:
+            print("Invalid port number. Using default port 8004.")
+
     # Big red startup message with emojis and ASCII art
     print("\n" + "=" * 60)
     print("📄 " + "\033[1;31m" + "PAPYRUS SERVER STARTING" + "\033[0m" + " 📄")

@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Changed
+- **Documentation Overhaul**: Updated `README.md` with a new architectural diagram, consolidated core module documentation, and corrected the file structure.
+- **Improved Maintainability**: Removed redundant `src/core/README.md` to centralize documentation.
+
 ## [0.0.1] - 2025-07-24
 
 ### Added
