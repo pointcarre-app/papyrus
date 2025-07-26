@@ -469,16 +469,17 @@ The application follows a modular, single-page application (SPA) architecture. T
 ## Visual Workflow
 
 ```mermaid
+
 graph TD
     subgraph "User Action"
         A["Edit JSON or Settings"]
     end
 
     subgraph "Processing Pipeline"
-        B["1. Measure Content </br> (preview/utils.js)"]
-        C["2. Calculate Page Breaks </br> (preview/calculator.js)"]
-        D["3. Render HTML Preview </br> (preview/renderer.js)"]
-        E["4. Update Statistics </br> (statistics/index.js)"]
+        B["Measure Content"]
+        C["Calculate Page Breaks"]
+        D["Render HTML Preview"]
+        E["Update Statistics"]
     end
 
     subgraph "Output"
