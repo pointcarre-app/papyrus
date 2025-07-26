@@ -1,0 +1,146 @@
+/**
+ * Component styles - Buttons, editor area, controls
+ */
+
+.editor-area {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.content-div {
+    border: 1px solid var(--border-color);
+    padding: 15px;
+    margin: 10px 0;
+    background: var(--bg-light);
+    border-radius: 4px;
+}
+
+.controls {
+    margin-bottom: 20px;
+}
+
+button:hover {
+    background: var(--primary-blue-hover);
+}
+
+button:focus {
+    outline: 2px solid var(--primary-blue);
+    outline-offset: 2px;
+}
+
+.preview-container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+/* JSON textarea styling */
+#json-input {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.4;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+/* Margin form styling */
+.margin-form {
+    margin-top: 20px;
+    padding: 20px;
+    background: var(--bg-light);
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+}
+
+.margin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 15px;
+}
+
+.margin-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.margin-input-group label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.margin-input-group input[type="number"] {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: inherit;
+    background: white;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.margin-input-group input[type="number"]:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.margin-input-group input[type="number"]:hover {
+    border-color: var(--primary-blue);
+}
+
+/* Font form styling */
+.font-form {
+    margin-top: 20px;
+    padding: 20px;
+    background: var(--bg-light);
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+}
+
+.font-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 15px;
+}
+
+.font-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.font-input-group label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.font-input-group input[type="number"] {
+    padding: 8px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: inherit;
+    background: white;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    text-align: center;
+}
+
+.font-input-group input[type="number"]:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.font-input-group input[type="number"]:hover {
+    border-color: var(--primary-blue);
+} 

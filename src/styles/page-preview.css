@@ -1,0 +1,64 @@
+/**
+ * Page preview styles - A4 page rendering and layout
+ */
+
+/* Container for tight page spacing */
+#pages-container {
+    display: block;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    line-height: normal;
+}
+
+/* New wrapper to handle positioning context */
+.page-wrapper {
+    position: relative;
+    margin: 0 auto 20px auto; /* This provides the space between pages */
+    width: 210mm;
+}
+
+/* Screen preview of A4 */
+.page-preview {
+    width: 100%; /* Take up the full width of the wrapper */
+    min-height: 297mm;
+    padding: var(--page-margin-top) var(--page-margin-right) var(--page-margin-bottom) var(--page-margin-left);
+    box-sizing: border-box;
+    background: white;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    /* No margin here, as it's handled by the wrapper */
+}
+
+.page-number-bottom {
+    position: absolute;
+    bottom: 5px; /* Closer to the actual page edge */
+    right: 5px; /* Closer to the actual page edge */
+    font-size: 9px;
+    font-family: 'Inter', sans-serif;
+    color: #555;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 3px 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    z-index: 10; /* Ensure it's above content */
+}
+
+.page-number-top {
+    text-align: right;
+    font-size: 10px;
+    color: var(--text-muted);
+    font-weight: normal;
+    background: transparent;
+    padding: 0 0 8px 0;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 10px;
+}
+
+.page-content {
+    /* The content area within a page */
+    padding: 0;
+    margin: 0;
+} 

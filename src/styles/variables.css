@@ -1,0 +1,36 @@
+/**
+ * CSS Variables and Design Tokens
+ */
+
+:root {
+    /* Page dimensions */
+    --page-margin-top: 20mm;
+    --page-margin-bottom: 20mm;
+    --page-margin-left: 20mm;
+    --page-margin-right: 20mm;
+    --page-width: 210mm;
+    --page-height: 297mm;
+    --content-width: 170mm;
+    --content-height: 257mm;
+
+    /* Pixel equivalents for JavaScript (96dpi) */
+    --content-height-px: 971px; /* 257mm * 3.78 */
+    --content-width-px: 643px;  /* 170mm * 3.78 */
+
+    /* Colors */
+    --border-color: #e0e0e0;
+    --border-color-dark: #ddd;
+    --bg-light: #fafafa;
+    --text-muted: #666;
+    --primary-blue: #007bff;
+    --primary-blue-hover: #0056b3;
+
+    /* Font sizes (will be overridden by JavaScript) */
+    --font-size-h1: 32px;
+    --font-size-h2: 28px;
+    --font-size-h3: 24px;
+    --font-size-h4: 20px;
+    --font-size-h5: 18px;
+    --font-size-h6: 16px;
+    --font-size-body: 14px;
+} 
