@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Try again .github/workflow after manual activation of Github Pages
+
 ### Changed
 - **Documentation Overhaul**: Updated `README.md` with a new architectural diagram, consolidated core module documentation, and corrected the file structure.
 - **Improved Maintainability**: Removed redundant `src/core/README.md` to centralize documentation.
