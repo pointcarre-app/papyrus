@@ -2,9 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
 
-## [0.0.2]
+
+## [0.0.3]
 
 ### Added
 - **CDN Support for Print Functionality**: Added optional `printCssUrl` parameter to `printPage()` function to enable proper CSS loading when the library is served via CDN (jsDelivr).
