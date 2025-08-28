@@ -10,7 +10,7 @@ export const DEFAULT_FONT_SIZES = {
     h4: 20,
     h5: 18,
     h6: 16,
-    body: 14
+    body: 16
 };
 
 // Current font size state

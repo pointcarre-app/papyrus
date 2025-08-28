@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 
 
+## [0.0.5]
+
+### Changed
+- **Default Body Font Size**: Changed the default body font size from 14px to 16px to match the default font size in the browser.
+
+```js
+// Default font sizes in px
+export const DEFAULT_FONT_SIZES = {
+    h1: 32,
+    h2: 28,
+    h3: 24,
+    h4: 20,
+    h5: 18,
+    h6: 16,
+    body: 16
+};
+```
+
+
 
 ## [0.0.4]
 
