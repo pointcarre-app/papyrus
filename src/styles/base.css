@@ -1,9 +1,21 @@
+/* Basic layout utilities */
+.page-content {
+    height: 100%;
+    overflow: hidden;
+}
+
+.page-content > * {
+    margin: 0;
+    padding: 0;
+} 
+
+
 /**
  * Base styles - Typography and basic layout
  */
 
 /* Font family classes */
-.font-heading {
+/* .font-heading {
     font-family: 'Spectral', serif;
 }
 
@@ -22,12 +34,12 @@ body {
 }
 
 /* Typography with dynamic font sizes and Spectral for headings */
-h1, h2, h3, h4, h5, h6 {
+/* h1, h2, h3, h4, h5, h6 {
     font-family: 'Spectral', serif;
     margin-top: 0;
-}
+} */
 
-h1 {
+/* h1 {
     font-size: var(--font-size-h1);
     margin-bottom: 1rem;
     font-weight: 600;
@@ -74,15 +86,5 @@ p {
     font-size: var(--font-size-body);
     line-height: 1.6;
     font-family: 'Inter', sans-serif;
-}
+} */ */
 
-/* Basic layout utilities */
-.page-content {
-    height: 100%;
-    overflow: hidden;
-}
-
-.page-content > * {
-    margin: 0;
-    padding: 0;
-} 

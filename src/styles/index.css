@@ -10,7 +10,9 @@
 @import './base.css';
 
 /* Component styles */
-@import './components.css';
+/* Directly in /scenery/main.html */
+/* @import './components.css'; */
+
 
 /* Page preview styles */
 @import './page-preview.css';

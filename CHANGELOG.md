@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 
 
+## v0.0.7
+
+- Updated `index.css` to remove the `components.css` import and also clean other css to avoid collision in maths.pm
+
 ## [0.0.6]
 
 ### Changed
