@@ -4,13 +4,20 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-### Try again .github/workflow after manual activation of Github Pages
+## [0.0.2]
+
+### Added
+- **CDN Support for Print Functionality**: Added optional `printCssUrl` parameter to `printPage()` function to enable proper CSS loading when the library is served via CDN (jsDelivr).
 
 ### Changed
+- **Enhanced Print Manager**: Modified `print-manager.js` to accept an optional CSS URL parameter, maintaining full backward compatibility while enabling usage from external applications via CDN.
 - **Documentation Overhaul**: Updated `README.md` with a new architectural diagram, consolidated core module documentation, and corrected the file structure.
 - **Improved Maintainability**: Removed redundant `src/core/README.md` to centralize documentation.
 
-## [0.0.1] - 2025-07-24
+### Fixed
+- **Print CSS Loading Issue**: Resolved the issue where print styles failed to load when the library was imported from jsDelivr or other CDN services.
+
+## [0.0.1]
 
 ### Added
 - **Multi-Document Management**: The application now supports managing, previewing, and printing multiple documents within a single session.

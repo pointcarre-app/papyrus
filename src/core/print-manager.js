@@ -7,9 +7,12 @@ import { getCurrentFontSizes } from './font-config.js';
 import { getShowPageNumbers } from './page-number-config.js';
 
 // Print function that uses a hidden iframe to avoid a popup window
-export function printPage(contentToPrint) {
+export function printPage(contentToPrint, printCssUrl = null) {
     const printContent = contentToPrint || document.getElementById('pages-container').innerHTML;
     const fontSizes = getCurrentFontSizes();
+    
+    // Use provided CSS URL or fall back to relative path for backward compatibility
+    const cssUrl = printCssUrl || '../src/styles/print.css';
 
     // Create a hidden iframe
     const printFrame = document.createElement('iframe');
@@ -32,7 +35,7 @@ export function printPage(contentToPrint) {
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 
                 <!-- Static Print Stylesheet -->
-                <link rel="stylesheet" type="text/css" href="../src/styles/print.css">
+                <link rel="stylesheet" type="text/css" href="${cssUrl}">
                 
                 <!-- Dynamic Font Styles -->
                 <style>
