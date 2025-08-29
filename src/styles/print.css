@@ -2,14 +2,14 @@
  * Static print styles - for clean, predictable PDF output.
  */
 
-body {
-    margin: 0;
-    padding: 0;
-    background: white;
-    font-family: 'Lexend', sans-serif; /* Default body font */
-    line-height: 1.5;
-    color: #1a1a1a;
-}
+/* body { */
+    /* margin: 0; */
+    /* padding: 0; */
+    /* background: white; */
+    /* font-family: 'Lexend', sans-serif; Default body font */
+    /* line-height: 1.5; */
+    /* color: #1a1a1a; */
+/* } */
 
 /* Define font families */
 .font-heading { font-family: 'Spectral', serif; }

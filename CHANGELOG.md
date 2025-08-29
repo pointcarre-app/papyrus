@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 
 
+
+
+## v0.0.8
+
+Commented all of this in `print.css` to avoid collision in maths.pm
+```css
+body {
+    margin: 0;
+    padding: 0;
+    background: white;
+    font-family: 'Lexend', sans-serif; /* Default body font */
+    line-height: 1.5;
+    color: #1a1a1a;
+}
+```
+
+
 ## v0.0.7
 
 - Updated `index.css` to remove the `components.css` import and also clean other css to avoid collision in maths.pm
