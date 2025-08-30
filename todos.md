@@ -2,12 +2,12 @@
 
 # Nice use case
 
-
 - [ ] Building a Resume
 
 
 # Fixes
 
+- [] Space between divs are not very dangerous ? #TODO sel
 
 - [ ] "Show page numbers at bottom" may need a less stupid approach
 
