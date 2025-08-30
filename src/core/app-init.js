@@ -109,7 +109,7 @@ function updateMarginsFromForm() {
         left: parseFloat(formData.get('margin-left')) || 5
     };
     
-    const newSpaceBetweenDivs = parseFloat(formData.get('space-between-divs')) ?? 3;
+    const newSpaceBetweenDivs = parseFloat(formData.get('space-between-divs')) ?? 0;
     
     setMargins(newMargins);
     setSpaceBetweenDivs(newSpaceBetweenDivs);

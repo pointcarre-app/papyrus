@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 
 
+## v0.0.10
+
+### Changed
+- `src/core/app-init.js`
+  - Changed default space between divs to 0.
+
+
 ## v0.0.9
 
 ### Fixed
