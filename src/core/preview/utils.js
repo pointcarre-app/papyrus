@@ -5,6 +5,7 @@
 
 export const A4_HEIGHT_MM = 297;
 export const A4_WIDTH_MM = 210;
+// TODO: should be computed dynamically based on the DPI of the screen
 export const MM_TO_PX = 3.78;
 
 /**

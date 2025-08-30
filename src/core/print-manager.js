@@ -84,6 +84,44 @@ export function printPage(contentToPrint, printCssUrl = null) {
             return;
         }
 
+        // Remove empty pages (pages with no content or only the repeating header)
+        try {
+            const doc = win.document;
+            const wrappers = Array.from(doc.querySelectorAll('.page-wrapper'));
+
+            const isEmptyWrapper = (wrapper) => {
+                const content = wrapper.querySelector('.page-content');
+                if (!content) return true;
+
+                // Ignore spacing helpers
+                const children = Array.from(content.children).filter(el => !el.classList.contains('space-between-div'));
+
+                // No children at all => empty
+                if (children.length === 0) return true;
+
+                // Only repeating header present => empty
+                if (children.length === 1 && (children[0].id === 'header-section')) return true;
+
+                return false;
+            };
+
+            const keepers = wrappers.filter(w => !isEmptyWrapper(w));
+
+            if (keepers.length > 0 && keepers.length !== wrappers.length) {
+                // Remove non-keeper pages
+                wrappers.forEach(w => { if (!keepers.includes(w) && w.parentNode) w.parentNode.removeChild(w); });
+
+                // Renumber pages if page numbers are present
+                const total = keepers.length;
+                keepers.forEach((w, idx) => {
+                    const pn = w.querySelector('.page-number-bottom');
+                    if (pn) pn.textContent = `${idx + 1} / ${total}`;
+                });
+            }
+        } catch (_) {
+            // Best-effort cleanup; ignore errors to avoid blocking print
+        }
+
         const handleAfterPrint = () => {
             // Use microtask to ensure Chrome resets its print state
             setTimeout(() => cleanup(), 0);

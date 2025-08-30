@@ -6,6 +6,17 @@ All notable changes to this project will be documented in this file.
 
 ## v0.0.10
 
+
+- In src/core/print-manager.js, right after the print iframe loads the content, I added a small pass that:
+  - Finds all .page-wrapper pages.
+  - Treats a page as “empty” if .page-content has no children other than spacing helpers, or has only the repeating header element (#header-section).
+  - Removes those empty pages from the print document.
+  - Renumbers .page-number-bottom elements if any pages were removed so numbering stays correct.
+
+
+
+## v0.0.10
+
 ### Changed
 - `src/core/app-init.js`
   - Changed default space between divs to 0.
