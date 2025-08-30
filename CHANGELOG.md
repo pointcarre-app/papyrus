@@ -4,6 +4,36 @@ All notable changes to this project will be documented in this file.
 
 
 
+## v0.0.9
+
+### Fixed
+- Chrome: print dialog opening only once. Printing now works reliably on every click by rebuilding a hidden iframe each time, using `srcdoc`, registering `onload` before injecting content, and performing robust cleanup via `afterprint` and a `matchMedia('print')` fallback.
+- Safari: eliminated a trailing blank page by changing print break rules to insert page breaks only between pages and switching printed page numbers to `position: absolute` during print.
+
+### Changed
+- `src/core/print-manager.js`
+  - Reworked print routine to create a hidden iframe per invocation with `data-print-frame="true"` and set `srcdoc` for atomic content injection.
+  - Registered `onload` before assigning `srcdoc` to avoid missed events.
+  - Added cleanup guards: remove any pre-existing print iframes before creating a new one and clear/remove the iframe after printing.
+  - Added `afterprint` handler and `matchMedia('print')` fallback to ensure consistent teardown across browsers (notably Chrome-based and Safari).
+  - Inserted a `<base href="...">` tag inside the print document so relative asset URLs resolve correctly within the iframe.
+  - Kept dynamic font sizing (H1–H6 and body) and included Google Fonts + KaTeX CSS in the print document for visual parity.
+  - Preserved the API: `printPage(contentToPrint, printCssUrl)` remains backward-compatible; `printCssUrl` is optional.
+
+- `src/styles/print.css`
+  - Applied page-break rules to only add breaks between pages:
+    - `.page-wrapper { page-break-inside: avoid; break-inside: avoid; }`
+    - `.page-wrapper + .page-wrapper { page-break-before: always; break-before: page; }`
+  - Changed `.page-number-bottom` to `position: absolute` under `@media print` to prevent Safari from pushing content onto an extra blank page.
+
+- `scenery/main.html`
+  - Removed an empty `class=""` from a container to satisfy the linter (H026) and keep markup clean.
+
+### Notes
+- For CDN usage, you can still pass a stylesheet URL via `printPage(_, printCssUrl)`; otherwise the default relative path `../src/styles/print.css` is used.
+- Ensure printed pages are rendered with the `.page-wrapper` structure; the updated print rules rely on it for correct pagination.
+
+
 
 ## v0.0.8
 
