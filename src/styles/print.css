@@ -36,6 +36,15 @@
         box-shadow: none;
     }
 
+    /* Reset all styles within printed content to avoid host CSS conflicts */
+    .page-content {
+        all: initial;
+        display: block;
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+    }
+
     /* Page number styling for print - use absolute so it doesn't create a new page in Safari */
     .page-number-bottom {
         position: absolute;

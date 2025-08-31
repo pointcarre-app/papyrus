@@ -34,6 +34,19 @@ export function printPage(contentToPrint, printCssUrl = null) {
     printFrame.style.border = 'none';
     document.body.appendChild(printFrame);
 
+
+
+//     <style>
+//     html { font-size: ${fontSizes.body}px; }
+//     body { font-size: ${fontSizes.body}px; }
+//     h1 { font-size: ${fontSizes.h1}px; }
+//     h2 { font-size: ${fontSizes.h2}px; }
+//     h3 { font-size: ${fontSizes.h3}px; }
+//     h4 { font-size: ${fontSizes.h4}px; }
+//     h5 { font-size: ${fontSizes.h5}px; }
+//     h6 { font-size: ${fontSizes.h6}px; }
+// </style>
+
     const html = `<!DOCTYPE html>
         <html>
             <head>
@@ -44,15 +57,7 @@ export function printPage(contentToPrint, printCssUrl = null) {
                 <!-- Static Print Stylesheet -->
                 <link rel="stylesheet" type="text/css" href="${cssUrl}">
                 <!-- Dynamic Font Styles -->
-                <style>
-                    body { font-size: ${fontSizes.body}px; }
-                    h1 { font-size: ${fontSizes.h1}px; }
-                    h2 { font-size: ${fontSizes.h2}px; }
-                    h3 { font-size: ${fontSizes.h3}px; }
-                    h4 { font-size: ${fontSizes.h4}px; }
-                    h5 { font-size: ${fontSizes.h5}px; }
-                    h6 { font-size: ${fontSizes.h6}px; }
-                </style>
+
                 <!-- Fonts -->
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
                 <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Lexend:wght@100..900&display=swap" rel="stylesheet" />
@@ -63,6 +68,10 @@ export function printPage(contentToPrint, printCssUrl = null) {
                 ${printContent}
             </body>
         </html>`;
+    
+
+
+    console.log(html);
 
     const cleanup = () => {
         try {

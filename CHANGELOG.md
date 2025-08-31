@@ -4,7 +4,12 @@ All notable changes to this project will be documented in this file.
 
 
 
-## v0.0.10
+## v0.0.12
+
+- `src/core/print-manager.js` : smaller css injection 
+- `page-preview.css` for A4 updated
+
+## v0.0.11
 
 
 - In src/core/print-manager.js, right after the print iframe loads the content, I added a small pass that:

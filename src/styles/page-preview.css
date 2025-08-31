@@ -58,7 +58,10 @@
 }
 
 .page-content {
-    /* The content area within a page */
+    /* Isolate content from host app styles so JSON controls appearance */
+    all: initial;
+    display: block;
+    box-sizing: border-box;
     padding: 0;
     margin: 0;
-} 
+}
